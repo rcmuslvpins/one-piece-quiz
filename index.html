@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>one piece quiz 👻</title>
+<!-- v13 identity-weighted scoring with non-saturating result resolution -->
+<style>
+:root{--ink:#51394b;--paper:#fff9f5;--berry:#d85f8f;--berry-dark:#a9406a;--blush:#ffd7e6;--pink:#f6a9c5;--cream:#fff1dc;--gold:#e9bd69;--lav:#e8ddf6;--sea:#b9e3df;--card:#fffdfb;--muted:#8b7182}
+*{box-sizing:border-box}body{margin:0;font-family:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#fbd8e6 0%,#fff0e5 38%,#fffaf5 72%,#e9f5f1 100%);color:var(--ink);min-height:100vh}
+body:before{content:"♡  ✦  ♡  ✧  ♡  ✦";position:fixed;inset:0;pointer-events:none;overflow:hidden;white-space:pre-wrap;word-spacing:42px;line-height:86px;font-size:18px;color:#fff;opacity:.34;transform:rotate(-5deg);padding:10px}
+.wrap{max-width:900px;margin:auto;padding:24px 16px 60px;position:relative}.mast{text-align:center;padding:26px 10px 8px}.skull{font-size:48px;filter:drop-shadow(0 3px 0 #fff)}h1{margin:5px 0 8px;font-size:clamp(34px,7vw,58px);line-height:.95;color:var(--berry-dark);letter-spacing:-2px;text-shadow:0 3px 0 #fff}.card{background:rgba(255,253,251,.96);border:2px solid #d88baa;border-radius:26px;box-shadow:0 10px 30px rgba(125,67,94,.12),6px 6px 0 rgba(255,185,210,.45);padding:22px;margin:18px 0}.card:before{content:"♡";float:right;color:#e7a0bb;font-size:20px}.progress{height:13px;background:#f6e5ec;border-radius:999px;overflow:hidden;border:2px solid #c76b90}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--berry),var(--gold),#a7d9d2);transition:.25s}.tiny{font-size:13px;color:var(--muted)}.qnum{font-weight:900;color:var(--berry);text-transform:uppercase;letter-spacing:.08em}.question{font-size:24px;font-weight:850;margin:8px 0 18px}.answers{display:grid;gap:10px}.ans{appearance:none;border:2px solid #ead0dc;background:#fff;border-radius:18px;padding:14px 16px;text-align:left;font:inherit;font-weight:700;color:var(--ink);cursor:pointer;transition:.15s;box-shadow:0 2px 0 #f4dce6}.ans:hover{transform:translateY(-2px);border-color:var(--berry);box-shadow:0 5px 0 #f3cfdd}.ans.selected{background:linear-gradient(135deg,#ffe3ee,#fff0c9);border-color:var(--berry);box-shadow:0 4px 0 #eeb2c9}.ans.selected:after{content:"  ♥";color:var(--berry)}.row{display:flex;gap:10px;justify-content:space-between;margin-top:18px;flex-wrap:wrap}.btn{border:0;border-radius:999px;padding:12px 19px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,var(--berry-dark),var(--berry));color:white;font-size:16px;box-shadow:0 4px 0 #82304f}.btn.secondary{background:#f5e7ed;color:var(--berry-dark);box-shadow:0 4px 0 #dfc6d1}.btn:disabled{opacity:.4;cursor:not-allowed}.intro label{font-weight:850;display:block;margin:12px 0 6px}.intro input,.intro select{width:100%;padding:13px 14px;border:2px solid #e5bdcd;border-radius:15px;font:inherit;background:#fff}.notice{background:#fff4da;border:2px dashed #e0b65f;border-radius:15px;padding:12px 14px;margin-top:14px}.privacy{background:#fff0f6;border:2px solid #efbdd0;border-radius:15px;padding:12px 14px;margin-top:12px}.hidden{display:none!important}.resultHero{text-align:center}.winner{font-size:clamp(38px,8vw,70px);margin:8px 0;color:var(--berry-dark);letter-spacing:-2px}.pct{font-size:30px;font-weight:950;color:#7c5870}.toplist{display:grid;gap:10px;margin-top:18px}.resultRow{display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:center;border:2px solid #ecd5df;border-radius:17px;padding:12px;background:white}.rank{font-weight:950;font-size:20px;color:var(--berry)}.rname{font-weight:900}.rpct{font-weight:900;color:#76556b}.badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}.badge{background:#f8eafa;border:2px solid #dec8ed;padding:7px 10px;border-radius:999px;font-size:13px;font-weight:850}.traits{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:16px}.trait{background:#fff3f7;border-radius:14px;padding:10px}.trait b{display:flex;justify-content:space-between}.meter{height:8px;background:#f0dfe7;border-radius:999px;overflow:hidden;margin-top:6px}.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--gold))}.footer{text-align:center;color:#8e7483;font-size:12px;margin-top:26px}.sharebox{background:#fff6fa;border:2px solid #efbdd0;border-radius:16px;padding:14px;margin-top:18px}.sharebox textarea{width:100%;min-height:110px;border:1px solid #d9c2cc;border-radius:10px;padding:10px;font:inherit}.spoiler{font-weight:800;color:#9a6b19}.miniGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:14px}.mini{background:#fff7fa;border-radius:14px;padding:12px;border:1px solid #ead4df}.mini strong{display:block;color:var(--berry);font-size:12px;text-transform:uppercase;letter-spacing:.05em}.credit{font-size:11px;color:#947b89;margin-top:10px}
+
+.searchWrap{margin-top:14px}.resultRow>div:nth-child(2){min-width:0}.rname{overflow-wrap:anywhere}.searchResult .resultRow{grid-template-columns:minmax(0,1fr) auto}.searchResult .resultRow>div:first-child{min-width:0}.profileNote{display:inline-block;margin-top:4px;font-size:11px;font-weight:850;color:#9a6b7f;background:#f9edf3;border-radius:999px;padding:3px 7px}.charSearch{width:100%;box-sizing:border-box;border:2px solid #ead4df;border-radius:18px;padding:14px 16px;font:inherit;background:#fff;color:#4c3547;outline:none}.charSearch:focus{border-color:#d879a5;box-shadow:0 0 0 4px #f9e2ed}.searchResult{margin-top:12px}.allList{max-height:520px;overflow:auto;margin-top:12px;padding-right:4px}.hiddenList{display:none}.smallBtn{margin-top:12px;width:100%}.resultRow.clickable{cursor:pointer;transition:.15s}.resultRow.clickable:hover{border-color:var(--berry);transform:translateY(-1px);box-shadow:0 4px 0 #f3cfdd}.comparePanel{margin-top:14px;background:#fff7fa;border:2px solid #efc9d9;border-radius:18px;padding:16px}.comparePanel h3{margin:0 0 4px;color:var(--berry-dark)}.compareGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px;margin-top:12px}.compareTrait{background:white;border:1px solid #edd7e0;border-radius:13px;padding:10px}.compareTrait b{display:block}.compareTrait .tiny{margin-top:3px}.whyPill{display:inline-block;margin:4px 5px 0 0;padding:5px 8px;border-radius:999px;background:#f8e7ef;font-size:12px;font-weight:800}.whyPill.diff{background:#fff0da}.tapHint{font-size:11px;color:var(--muted);margin-top:3px}
+.matchSummary{background:#fff;border:1px solid #ecd5df;border-radius:14px;padding:12px 13px;margin:12px 0;line-height:1.5}
+.matchSummary b{color:var(--berry-dark)}.identityNote{font-size:11px;color:var(--muted);margin-top:8px;font-style:italic}
+
+/* v14.2 — extra pink / extra cute UI polish. Scoring + results logic unchanged. */
+:root{--ink:#57374d;--paper:#fff8fc;--berry:#e85f9a;--berry-dark:#b73570;--blush:#ffd5e7;--pink:#ff9fc6;--cream:#fff0f7;--gold:#f4bfd5;--lav:#f1ddff;--sea:#ffdbea;--card:#fffafd;--muted:#957083}
+html{background:#ffd8e9}
+body{background:
+ radial-gradient(circle at 8% 5%,rgba(255,255,255,.92) 0 2px,transparent 3px),
+ radial-gradient(circle at 91% 13%,rgba(255,255,255,.85) 0 3px,transparent 4px),
+ linear-gradient(180deg,#ffd4e7 0%,#ffe6f0 32%,#fff0f7 68%,#ffdceb 100%);background-size:70px 70px,105px 105px,auto;color:var(--ink)}
+body:before{content:"♡   ✦   ♡   ✧   🎀   ♡   ✦   ♡";color:#fff;opacity:.42;word-spacing:30px;line-height:92px;font-size:16px;transform:rotate(-4deg)}
+.wrap{max-width:920px;padding-bottom:80px}
+.mast{padding:30px 10px 14px;position:relative}
+.skull{font-size:52px}.mast h1{color:#b8326c;text-shadow:0 3px 0 #fff,0 7px 18px rgba(189,53,111,.13)}
+.card{position:relative;overflow:visible;background:linear-gradient(145deg,rgba(255,255,255,.97),rgba(255,247,252,.97));border:2px solid #ee9fc0;border-radius:30px;box-shadow:0 12px 34px rgba(177,65,112,.13),7px 7px 0 rgba(255,170,204,.36);padding:24px}
+.card:before{content:"♡";color:#ed8eb5;font-size:22px}.card:after{content:"✦";position:absolute;left:16px;top:13px;color:#f4bad1;font-size:12px;opacity:.9}
+.progress{height:15px;background:#ffe8f1;border:2px solid #e878a5;box-shadow:inset 0 1px 3px rgba(177,65,112,.08)}.bar{background:linear-gradient(90deg,#f25f9b,#ff9fc7,#e8b8ff,#ffbad7)}
+.question{color:#513246}.qnum{color:#df5a91}.ans{border:2px solid #f1cddd;background:linear-gradient(180deg,#fff,#fff9fc);border-radius:20px;box-shadow:0 3px 0 #f5dce7}.ans:hover{border-color:#e86f9f;box-shadow:0 6px 0 #f2c7d9}.ans.selected{background:linear-gradient(135deg,#ffd8e9,#ffe9f3 58%,#f3e2ff);border-color:#e55d95;box-shadow:0 5px 0 #edb1ca}.ans.selected:after{content:"  ♥︎"}
+.btn{background:linear-gradient(135deg,#b9326c,#ec5f9a 62%,#f48bb7);box-shadow:0 5px 0 #8f2753,0 8px 16px rgba(185,50,108,.14);letter-spacing:.01em}.btn.secondary{background:linear-gradient(180deg,#fff5fa,#f9e3ed);color:#a83b68;box-shadow:0 4px 0 #e6bdce}.btn:not(:disabled):active{transform:translateY(2px);box-shadow:0 2px 0 #8f2753}
+.intro input,.intro select,.charSearch{border:2px solid #efb9d0;background:#fffafd;box-shadow:inset 0 1px 0 #fff}.intro input:focus,.intro select:focus,.charSearch:focus{outline:none;border-color:#e66b9d;box-shadow:0 0 0 4px #fbdce9}
+.notice{background:#fff2f8;border-color:#e8a2bf}.privacy{background:linear-gradient(135deg,#ffe9f2,#f8eaff);border-color:#eab2cc}
+.resultHero{background:linear-gradient(145deg,#fffafd,#ffeef6 65%,#f7eaff)}.winner{color:#b8326c;text-shadow:0 2px 0 #fff}.pct{color:#8c5270}.badge{background:linear-gradient(180deg,#fbeaff,#f8ddf0);border-color:#e3b6d5;color:#74435f}
+.mini{background:linear-gradient(145deg,#fff,#fff0f7);border:1.5px solid #efcada}.mini strong{color:#dc5c91}
+.resultRow{border:2px solid #f0cfdd;border-radius:22px;padding:14px;background:linear-gradient(145deg,#fff,#fff9fc);box-shadow:0 3px 0 rgba(240,193,212,.45)}.resultRow:nth-child(odd){background:linear-gradient(145deg,#fff,#fff4f9)}.resultRow.clickable:hover{border-color:#e66f9f;box-shadow:0 6px 0 #f0c4d6}.rank{color:#df5a91}.rpct{color:#7d526b}.tapHint{color:#ad7890}.profileNote{background:#fae7f0;color:#9e5576}
+.comparePanel{background:linear-gradient(145deg,#fff9fc,#fff0f7);border:2px solid #edb7ce;border-radius:24px;box-shadow:inset 0 0 0 3px rgba(255,255,255,.55)}.compareTrait{border-color:#efd1df;border-radius:16px;background:#fff}.whyPill{background:#f9dfeb}.whyPill.diff{background:#f9e9f2}.matchSummary{background:#fff;border-color:#efc9da}
+.trait{background:linear-gradient(145deg,#fff0f7,#fae9ff);border:1px solid #f1ccdd}.meter{background:#f2dce6}.meter i{background:linear-gradient(90deg,#f06d9f,#ffacd0,#e5b9ff)}
+.sharebox{background:linear-gradient(145deg,#fff8fc,#ffeaf3);border-color:#edb2ca}.sharebox textarea{background:#fffafd;border-color:#e9bfd1}.footer{color:#9b7186}.allList{scrollbar-color:#e889af #fbe4ee}
+@media(max-width:600px){.wrap{padding:12px 10px 55px}.mast{padding-top:22px}.skull{font-size:42px}.mast:after{font-size:10px}.card{padding:18px 15px;border-radius:26px;box-shadow:0 9px 25px rgba(177,65,112,.12),5px 5px 0 rgba(255,170,204,.32)}.resultRow{grid-template-columns:44px minmax(0,1fr) auto;gap:9px;padding:13px 11px}.question{font-size:22px}.btn{padding:12px 17px}.winner{font-size:46px}.pct{font-size:27px}}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="mast"><div class="skull">👻</div><h1>one piece quiz</h1></header>
+<section id="intro" class="card intro">
+<h2>Before you set sail…</h2>
+<label for="name">Your name / nickname</label><input id="name" maxlength="40" placeholder="e.g. your nickname" />
+<label for="scope">Character pool</label><select id="scope"><option value="all">All included characters (may contain name spoilers)</option><option value="early">Early-series pool (through Skypiea-ish)</option></select>
+<div class="notice"><span class="spoiler">⚠️ Spoiler note:</span> the full pool can reveal character names/affiliations from later One Piece. This quiz does not reveal plot twists or deaths.</div>
+<p class="tiny">Pick what is actually true, not what sounds coolest. You can go back and change answers. The scoring compares broad traits, distinctive strengths, and meaningful contradictions rather than “A = Luffy.”</p><div class="privacy"><b>♡ little privacy note:</b> Your name, quiz answers, personality scores, and final character matches will be shared privately with the quiz owner when you finish.</div>
+<button class="btn" id="start">Start the quiz →</button>
+</section>
+<section id="quiz" class="hidden"><div class="card"><div class="progress"><div class="bar" id="bar"></div></div><p class="tiny" id="counter"></p><div class="qnum" id="qnum"></div><div class="question" id="question"></div><p class="tiny" id="selectHint" style="font-weight:800;margin-top:-10px;margin-bottom:14px">Select up to 2 answers.</p><div class="answers" id="answers"></div><div class="row"><button class="btn secondary" id="back">← Back</button><button class="btn" id="next" disabled>Next →</button></div></div></section>
+<section id="results" class="hidden"></section>
+<div class="footer">Fan-made personality quiz. One Piece and its characters belong to Eiichiro Oda / Shueisha / Toei Animation. No official affiliation.</div>
+</div>
+<form name="quiz-results" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="hidden"><input name="form-name" value="quiz-results"><input name="bot-field"><input name="name"><input name="winner"><input name="top10"><input name="fullranking"><input name="profile"><textarea name="answers"></textarea><input name="scoring_version"><input name="timestamp"></form>
+<script>
+const T=['emotion','social','attachment','independence','impulse','empathy','assert','idealism','strategy','humor','ambition','trust','romance','protect','adventure','express','sensitivity','reassurance','stubborn','duty','optimism','avoidance','confidence','defensive'];
+const V=(o={})=>Object.fromEntries(T.map(k=>[k,o[k]??5]));
+const Q=[
+["At a party where you barely know anyone, what sounds most like you?",[["I make friends fast and bounce around the room.",{social:3,confidence:2}],["I find one person I click with and stay near them.",{social:1,attachment:3}],["I'm friendly, but I observe before opening up.",{social:1,trust:-2,strategy:2}],["I'm pretty quiet until someone pulls me in.",{social:-3,confidence:-1}],["I become the entertainment because silence is painful.",{social:3,humor:3,express:2}]]],
+["Someone you love is unusually quiet for hours. Your FIRST internal reaction?",[["They're probably busy; I don't read into it.",{trust:3,reassurance:-3}],["Did I do something wrong?",{reassurance:4,sensitivity:2,attachment:2}],["I worry something happened to them.",{empathy:2,attachment:2,sensitivity:1}],["I'm irritated they didn't give me a heads-up.",{assert:2,stubborn:1,attachment:1}],["I act like I don't care, but I absolutely care.",{defensive:3,attachment:2,express:-1}]]],
+["When you're genuinely angry, what happens most naturally?",[["I cry or get visibly emotional.",{emotion:3,express:3}],["I confront it immediately.",{assert:3,avoidance:-3}],["I get cold, controlled, and hard to read.",{express:-3,strategy:2}],["I say something impulsive and regret it.",{impulse:3,emotion:2}],["I leave because I need space before talking.",{avoidance:2,impulse:-2}],["Sarcasm. Lots of sarcasm.",{humor:2,defensive:2}]]],
+["Which need feels MOST central to a happy life?",[["Deep love and closeness.",{attachment:3,romance:3}],["Freedom and autonomy.",{independence:4}],["Security and predictability.",{duty:2,adventure:-3}],["Achievement and being impressive.",{ambition:4,confidence:1}],["Purpose / doing something meaningful.",{idealism:4}],["Fun, novelty, and stories to tell.",{adventure:3,humor:2}]]],
+["How do you usually treat people you don't particularly like?",[["Still warm and polite unless they've actually hurt someone.",{empathy:3,idealism:1}],["Civil, but they are NOT getting my softness.",{empathy:1,defensive:2}],["My face/tone will probably reveal that I dislike them.",{express:2,stubborn:2}],["I can be dismissive or cutting if I think they deserve it.",{empathy:-3,assert:3,defensive:2}],["I avoid them rather than create drama.",{avoidance:3,assert:-1}]]],
+["What happens when your pride gets hurt?",[["I mostly feel sad/insecure and want reassurance.",{confidence:-2,reassurance:3,sensitivity:3}],["I get defensive and need to prove myself.",{defensive:3,stubborn:2,confidence:1}],["I get angry. I hate feeling embarrassed.",{emotion:2,assert:2,stubborn:2}],["I laugh it off pretty easily.",{confidence:3,humor:2}],["I withdraw and process it privately.",{express:-2,avoidance:2}]]],
+["How bossy are you, realistically?",[["Very. If nobody takes charge, I will.",{assert:4,confidence:2,duty:1}],["I can take charge when I know what I'm doing.",{assert:2,strategy:2}],["Mostly with people I'm close to.",{assert:1,attachment:1,stubborn:2}],["I prefer collaborating to directing people.",{empathy:1,assert:-1}],["Please do not put me in charge.",{assert:-3,confidence:-2}]]],
+["Which kind of attention feels best?",[["Being deeply known and chosen by one person.",{attachment:4,reassurance:2}],["Being admired / impressive to people.",{confidence:2,ambition:3}],["Being needed and useful.",{protect:2,duty:3}],["Making people laugh and enjoy me.",{humor:3,social:2}],["I don't really crave attention.",{independence:3,reassurance:-2}]]],
+["If someone criticizes you fairly, what are you most likely to do FIRST?",[["Feel hurt, even if I know they're right.",{sensitivity:3,emotion:2}],["Defend myself before I can stop myself.",{defensive:3,stubborn:2}],["Ask questions and think it through.",{strategy:3,defensive:-2}],["Apologize and immediately try to fix it.",{duty:2,empathy:2}],["Shrug. Criticism doesn't get under my skin much.",{confidence:3,sensitivity:-3}]]],
+["When conflict starts with someone you love, your instinct is to…",[["Talk NOW. I cannot sit in uncertainty.",{avoidance:-3,reassurance:3,assert:2}],["Cry / get overwhelmed but still want to resolve it.",{emotion:3,sensitivity:2,attachment:2}],["Get defensive or sharp, then soften later.",{defensive:3,stubborn:2}],["Take space and return once I'm calm.",{avoidance:1,strategy:2,impulse:-2}],["Avoid it and hope the mood passes.",{avoidance:4,assert:-2}]]],
+["How selective is your softness?",[["Not very; I care about people easily.",{empathy:4,trust:2}],["I'm kind generally, but my deepest softness is reserved for my people.",{empathy:2,attachment:2}],["Very selective. Most people don't get access to that side of me.",{trust:-2,defensive:2,attachment:2}],["I can be downright cold to outsiders and extremely soft to my person.",{empathy:-2,defensive:3,attachment:3}]]],
+["How much do you enjoy being in control?",[["A lot. I feel better when I'm steering.",{assert:3,stubborn:3,confidence:2}],["Mostly when something important is at stake.",{duty:2,assert:2}],["I like having input, not controlling everything.",{assert:1,empathy:1}],["I'd rather someone competent take the lead.",{assert:-2,confidence:-1}],["Control makes me uncomfortable; I prefer to go with the flow.",{assert:-3,adventure:1}]]],
+["How trusting are you when meeting someone new?",[["Pretty trusting until given a reason not to be.",{trust:4,optimism:2}],["Friendly, but trust has to build.",{trust:1,strategy:1}],["Cautious. I notice inconsistencies fast.",{trust:-2,strategy:3}],["Very guarded. People have to earn access.",{trust:-4,defensive:2}]]],
+["What does insecurity usually make you do?",[["Seek reassurance or closeness.",{reassurance:4,attachment:2}],["People-please / try harder to be lovable.",{reassurance:2,empathy:2,confidence:-2}],["Get jealous or possessive.",{attachment:3,stubborn:2,trust:-1}],["Perform confidence and hide the insecurity.",{defensive:3,express:-2,confidence:1}],["Pull away before I can be rejected.",{avoidance:3,defensive:3,attachment:1}],["I'm not insecure very often.",{confidence:4,reassurance:-3}]]],
+["Your relationship with rules is closest to…",[["Rules exist for a reason; I usually follow them.",{duty:2,idealism:1}],["I'll follow sensible rules and ignore stupid ones.",{independence:2,strategy:1}],["Rules are suggestions if nobody gets hurt.",{independence:3}],["Tell me I can't and suddenly I want to.",{stubborn:3,independence:3}]]],
+["When a friend is making a terrible decision, you…",[["Tell them directly, even if they get mad.",{assert:3,protect:2}],["Gently explain why I'm worried.",{empathy:3,protect:2}],["Support them emotionally but let them choose.",{empathy:2,independence:1}],["Try to quietly steer the situation behind the scenes.",{strategy:3,protect:2}],["Probably join them if it sounds fun.",{impulse:3,adventure:2}]]],
+["How obvious are your feelings to other people?",[["Painfully obvious. My face/voice gives me away.",{express:4,emotion:2}],["Pretty obvious to people who know me.",{express:2}],["I can hide them when I need to.",{express:-1,strategy:1}],["I'm extremely difficult to read.",{express:-4,defensive:1}]]],
+["Which description fits your confidence best?",[["Genuinely very self-assured.",{confidence:4,assert:2}],["Confident in many areas, insecure in a few important ones.",{confidence:2,sensitivity:1}],["I can LOOK confident while doubting myself inside.",{confidence:-1,defensive:3}],["I second-guess myself a lot.",{confidence:-3,reassurance:2}],["My confidence changes wildly depending on the situation.",{emotion:1,confidence:-1}]]],
+["What kind of humor sounds most like you?",[["Silly, playful, goofy.",{humor:4,optimism:1}],["Teasing / banter with people I love.",{humor:3,attachment:1}],["Dry, dark, or sarcastic.",{humor:3,defensive:1,optimism:-1}],["Dramatic reactions ARE the joke.",{humor:3,express:2}],["I'm not especially jokey.",{humor:-3}]]],
+["How do you feel about genuinely unfamiliar experiences?",[["I actively crave them; newness itself is exciting.",{adventure:4}],["I like new things, especially when I can prepare first.",{adventure:2,strategy:2}],["I'm interested when I have someone I trust with me.",{adventure:1,attachment:2}],["I'm cautious at first, but curiosity can win me over.",{strategy:2,adventure:0}],["Familiar and comfortable usually sounds better to me.",{adventure:-3}]]],
+["What does love feel like to you?",[["All-consuming. My person becomes incredibly important to me.",{romance:4,attachment:4,emotion:2}],["Warm, steady partnership and everyday closeness.",{romance:3,attachment:2,duty:2}],["Devotion shown through actions more than words.",{protect:3,duty:2,express:-1}],["Exciting, passionate, and dramatic.",{romance:4,emotion:2,impulse:1}],["Important, but only one part of my life.",{romance:1,independence:3}],["Romance isn't a major priority for me.",{romance:-4}]]],
+["Someone insults a person you love in front of you. You…",[["Immediately confront them.",{protect:4,assert:3}],["Get furious, but check what my person wants first.",{protect:3,empathy:2,emotion:2}],["Cut them down verbally.",{protect:3,strategy:2,defensive:1}],["Comfort my person and avoid escalating.",{protect:2,empathy:3,avoidance:2}],["Assume my person can handle it unless they ask me to step in.",{independence:2,protect:-1}]]],
+["How responsible are you when other people depend on you?",[["Extremely. I become the responsible one automatically.",{duty:4,protect:2}],["Reliable when it matters, even if I'm messy elsewhere.",{duty:3}],["I try, but I can get overwhelmed or forgetful.",{duty:0,impulse:1}],["I hate being responsible for other people.",{duty:-4,independence:2}]]],
+["When you want something badly, how stubborn are you?",[["Borderline impossible to move.",{stubborn:4,ambition:2}],["Pretty stubborn, especially if it matters emotionally.",{stubborn:3,emotion:1}],["Persistent, but evidence can change my mind.",{stubborn:1,strategy:2}],["I compromise pretty easily.",{stubborn:-2,empathy:1}],["I often give in to keep the peace.",{stubborn:-3,avoidance:2}]]],
+["How ambitious are you?",[["Very. I want to accomplish something BIG.",{ambition:4}],["I have specific goals I care deeply about.",{ambition:3,duty:1}],["I want a good life more than status or achievement.",{ambition:-1,attachment:1}],["I'm much more motivated by comfort/people/fun than accomplishment.",{ambition:-3,humor:1}]]],
+["Which flaw is most likely to get you in trouble?",[["I feel things too intensely.",{emotion:3,sensitivity:2}],["I trust too easily.",{trust:3,strategy:-1}],["I overthink and become suspicious.",{trust:-2,strategy:2,defensive:1}],["I'm stubborn and hate backing down.",{stubborn:3}],["I act before I think.",{impulse:4}],["I avoid things until they're worse.",{avoidance:4}]]],
+["Which statement about empathy fits you best?",[["Other people's feelings hit me HARD, even when I wish they didn't.",{empathy:4,sensitivity:2}],["I'm caring, but I can separate their feelings from mine.",{empathy:2,confidence:1}],["My empathy is strongest for people I love; strangers affect me less.",{empathy:0,attachment:2}],["I understand feelings intellectually more than I absorb them.",{empathy:-1,strategy:2}],["I'm not naturally very concerned with other people's feelings.",{empathy:-4}]]],
+["What is your default outlook when things are uncertain?",[["It'll probably work out somehow.",{optimism:4,trust:1}],["Hopeful, but realistic.",{optimism:2,strategy:1}],["I immediately see what could go wrong.",{optimism:-3,strategy:2}],["I expect disappointment so I'm pleasantly surprised if I'm wrong.",{optimism:-4,defensive:2}]]],
+["When a strong feeling hits you, how often do you ACT before you've fully thought it through?",[["A lot — the reaction can come out before the thinking does.",{impulse:4,emotion:1}],["Sometimes, especially when I'm hurt, excited, angry, or scared.",{impulse:2,emotion:1}],["Not often — I usually catch myself before I act on the feeling.",{impulse:-2,strategy:1}],["Almost never. Even emotional decisions get mentally rehearsed first.",{impulse:-4,strategy:2}]]],
+["If someone hurts you emotionally, what defense comes out?",[["I tell them exactly how hurt I am.",{express:3,defensive:-1,assert:1}],["I get sharp/angry so they can't see how hurt I am.",{defensive:4,assert:2}],["I act like I don't care.",{defensive:4,express:-3}],["I withdraw and become hard to reach.",{defensive:3,avoidance:3}],["I forgive quickly if they genuinely repair it.",{defensive:-2,empathy:2}]]],
+["Which social role do you fall into most naturally?",[["The caretaker / emotional support person.",{empathy:3,protect:2}],["The organizer who keeps everyone functioning.",{duty:3,strategy:2}],["The loud/funny one.",{social:3,humor:3}],["The opinionated one who says what everyone is thinking.",{assert:3,stubborn:1}],["The observer who notices everything.",{strategy:3,social:-1}],["The one who mostly wants to be with my favorite person.",{attachment:3,social:-1}]]],
+["You have a free weekend with zero obligations. Pick the most appealing.",[["Stay home, get cozy, talk to my favorite people.",{attachment:2}],["Go somewhere new just because it sounds interesting.",{adventure:3}],["Plan a fun social day with friends.",{social:3,humor:1}],["Work on a personal goal/project.",{ambition:3,independence:2}],["Do absolutely whatever I feel like moment to moment.",{independence:3,impulse:1}]]],
+["How important is being seen as a GOOD person?",[["Extremely. My conscience bothers me if I hurt someone.",{idealism:4,empathy:2}],["Important, but good intentions aren't enough; actions matter.",{idealism:3,duty:2}],["I care more about loyalty to my people than abstract morality.",{idealism:0,attachment:2,protect:2}],["I have my own code and don't need everyone to approve of it.",{idealism:-1,independence:3}],["Honestly, not very important to me.",{idealism:-4,confidence:1}]]],
+["Which would bother you MORE?",[["Someone thinking I'm weak.",{confidence:1,stubborn:3}],["Someone thinking I'm unlovable.",{reassurance:4,sensitivity:2}],["Someone thinking I'm incompetent.",{ambition:2,duty:2}],["Someone controlling me.",{independence:4,assert:2}],["Someone I love feeling uncared for by me.",{empathy:3,protect:3}]]],
+["When you enter a room, how intimidating do you think you come across?",[["Very. People tend to know not to test me.",{assert:4,confidence:3,empathy:-1}],["Confident, but approachable.",{assert:2,confidence:2,social:1}],["More warm/cute/friendly than intimidating.",{empathy:2,social:2,assert:-1}],["Probably anxious/quiet rather than intimidating.",{confidence:-2,assert:-2,sensitivity:1}],["It changes completely depending on my mood.",{emotion:2,express:2}]]],
+["Final gut check: what sounds MOST like your core?",[["A huge heart with huge feelings.",{emotion:3,empathy:3,sensitivity:2}],["A loyal protector who shows up for my people.",{protect:4,duty:2}],["A stubborn little menace with a soft center.",{stubborn:3,humor:2,attachment:2,defensive:2}],["A practical brain trying to keep everyone alive.",{strategy:4,duty:3}],["A free spirit who refuses to be boxed in.",{independence:4,adventure:3}],["A romantic who wants to love and be loved deeply.",{romance:4,attachment:3,reassurance:2}]]]
+];
+const C=[];
+const clamp=n=>Math.max(0,Math.min(10,n));
+const add=(name,arc,tags,v)=>{
+  const x={...v};
+  x.express ??= clamp((x.emotion*0.72+x.social*0.28));
+  x.sensitivity ??= clamp((x.emotion*0.55+x.empathy*0.25+(10-x.independence)*0.20));
+  x.reassurance ??= clamp(5);
+  x.stubborn ??= clamp((x.assert*0.55+x.independence*0.30+x.ambition*0.15));
+  x.duty ??= clamp((x.strategy*0.35+x.protect*0.30+x.idealism*0.20+(10-x.impulse)*0.15));
+  x.optimism ??= clamp((x.idealism*0.50+x.trust*0.30+x.humor*0.20));
+  x.avoidance ??= clamp((10-x.assert)*0.55+(10-x.social)*0.20+(10-x.independence)*0.25);
+  x.confidence ??= clamp(x.assert*0.45+x.independence*0.35+x.ambition*0.20);
+  x.reassurance = v.reassurance ?? clamp(x.attachment*0.50+x.sensitivity*0.30+(10-x.confidence)*0.20);
+  x.defensive ??= clamp(x.sensitivity*0.35+(10-x.trust)*0.30+x.stubborn*0.20+x.avoidance*0.15);
+  C.push({name,arc,tags,v:V(x)});
+};
+add('Monkey D. Luffy','early',['Straw Hat'],{emotion:8,social:9,attachment:8,independence:10,impulse:10,empathy:8,assert:9,idealism:9,strategy:3,humor:9,ambition:10,trust:9,romance:1,protect:10,adventure:10});
+add('Roronoa Zoro','early',['Straw Hat'],{emotion:3,social:4,attachment:6,independence:9,impulse:5,empathy:5,assert:9,idealism:7,strategy:6,humor:4,ambition:10,trust:7,romance:2,protect:9,adventure:8});
+add('Nami','early',['Straw Hat'],{emotion:7,social:7,attachment:7,independence:8,impulse:5,empathy:7,assert:9,idealism:6,strategy:9,humor:6,ambition:7,trust:5,romance:4,protect:7,adventure:7});
+add('Usopp','early',['Straw Hat'],{emotion:9,social:7,attachment:8,independence:5,impulse:6,empathy:8,assert:4,idealism:8,strategy:7,humor:9,ambition:7,trust:7,romance:5,protect:7,adventure:6});
+add('Sanji','early',['Straw Hat'],{emotion:8,social:7,attachment:9,independence:6,impulse:7,empathy:9,assert:8,idealism:8,strategy:7,humor:7,ambition:8,trust:7,romance:10,protect:10,adventure:7});
+add('Tony Tony Chopper','early',['Straw Hat'],{emotion:9,social:6,attachment:9,independence:4,impulse:5,empathy:10,assert:4,idealism:9,strategy:7,humor:7,ambition:7,trust:9,romance:2,protect:8,adventure:6});
+add('Nico Robin','early',['Straw Hat'],{emotion:3,social:4,attachment:6,independence:8,impulse:2,empathy:7,assert:6,idealism:6,strategy:10,humor:5,ambition:6,trust:3,romance:3,protect:7,adventure:7});
+add('Vivi','early',['Ally','Princess'],{emotion:8,social:8,attachment:9,independence:6,impulse:4,empathy:10,assert:7,idealism:10,strategy:7,humor:5,ambition:7,trust:8,romance:4,protect:10,adventure:5});
+add('Karoo','early',['Ally'],{emotion:7,social:7,attachment:9,independence:4,impulse:6,empathy:8,assert:4,idealism:7,strategy:4,humor:8,ambition:4,trust:9,romance:1,protect:9,adventure:7});
+add('Shanks','early',['Pirate'],{emotion:5,social:9,attachment:7,independence:10,impulse:5,empathy:8,assert:9,idealism:8,strategy:9,humor:8,ambition:8,trust:8,romance:3,protect:10,adventure:9});
+add('Buggy','early',['Pirate','Antagonist'],{emotion:9,social:9,attachment:4,independence:8,impulse:8,empathy:3,assert:8,idealism:3,strategy:5,humor:10,ambition:10,trust:3,romance:3,protect:3,adventure:8});
+add('Koby','early',['Marine'],{emotion:8,social:5,attachment:7,independence:5,impulse:3,empathy:10,assert:6,idealism:10,strategy:6,humor:4,ambition:9,trust:8,romance:2,protect:9,adventure:6});
+add('Helmeppo','early',['Marine'],{emotion:7,social:6,attachment:5,independence:5,impulse:6,empathy:5,assert:6,idealism:6,strategy:5,humor:5,ambition:7,trust:5,romance:3,protect:6,adventure:5});
+add('Smoker','early',['Marine'],{emotion:3,social:4,attachment:4,independence:9,impulse:3,empathy:6,assert:10,idealism:8,strategy:8,humor:2,ambition:7,trust:4,romance:1,protect:8,adventure:6});
+add('Tashigi','early',['Marine'],{emotion:7,social:6,attachment:6,independence:7,impulse:5,empathy:8,assert:7,idealism:10,strategy:6,humor:4,ambition:8,trust:7,romance:2,protect:8,adventure:6});
+add('Dracule Mihawk','early',['Warlord'],{emotion:1,social:2,attachment:2,independence:10,impulse:1,empathy:4,assert:10,idealism:4,strategy:10,humor:2,ambition:8,trust:3,romance:2,protect:4,adventure:5});
+add('Boa Hancock','all',['Warlord'],{emotion:9,social:6,attachment:10,independence:8,impulse:7,empathy:5,assert:10,idealism:5,strategy:6,humor:6,ambition:7,trust:3,romance:10,protect:9,adventure:6});
+add('Perona','all',['Pirate','Thriller Bark'],{emotion:9,social:6,attachment:8,independence:7,impulse:7,empathy:6,assert:8,idealism:4,strategy:6,humor:8,ambition:5,trust:5,romance:6,protect:6,adventure:5});
+add('Brook','all',['Straw Hat'],{emotion:7,social:9,attachment:8,independence:7,impulse:7,empathy:8,assert:6,idealism:8,strategy:5,humor:10,ambition:7,trust:8,romance:6,protect:8,adventure:8});
+add('Franky','all',['Straw Hat'],{emotion:9,social:9,attachment:8,independence:8,impulse:8,empathy:8,assert:9,idealism:8,strategy:7,humor:9,ambition:9,trust:8,romance:3,protect:9,adventure:9});
+add('Jinbe','all',['Straw Hat'],{emotion:4,social:6,attachment:7,independence:8,impulse:2,empathy:9,assert:8,idealism:10,strategy:9,humor:3,ambition:6,trust:8,romance:2,protect:10,adventure:7});
+add('Portgas D. Ace','all',['Pirate'],{emotion:7,social:8,attachment:9,independence:9,impulse:8,empathy:8,assert:9,idealism:7,strategy:6,humor:8,ambition:8,trust:8,romance:4,protect:10,adventure:9});
+add('Sabo','all',['Revolutionary'],{emotion:6,social:8,attachment:8,independence:8,impulse:5,empathy:8,assert:8,idealism:10,strategy:9,humor:7,ambition:8,trust:7,romance:3,protect:9,adventure:8});
+add('Trafalgar Law','all',['Worst Generation'],{emotion:3,social:3,attachment:6,independence:9,impulse:2,empathy:6,assert:8,idealism:5,strategy:10,humor:3,ambition:8,trust:3,romance:2,protect:7,adventure:7});
+add('Eustass Kid','all',['Worst Generation'],{emotion:7,social:5,attachment:6,independence:10,impulse:9,empathy:3,assert:10,idealism:4,strategy:5,humor:4,ambition:10,trust:4,romance:2,protect:7,adventure:9});
+add('Killer','all',['Worst Generation'],{emotion:3,social:4,attachment:8,independence:7,impulse:4,empathy:6,assert:8,idealism:5,strategy:8,humor:3,ambition:8,trust:7,romance:2,protect:9,adventure:8});
+add('Jewelry Bonney','all',['Worst Generation'],{emotion:8,social:7,attachment:7,independence:9,impulse:9,empathy:7,assert:9,idealism:6,strategy:5,humor:7,ambition:7,trust:5,romance:2,protect:8,adventure:9});
+add('Basil Hawkins','all',['Worst Generation'],{emotion:2,social:3,attachment:3,independence:7,impulse:1,empathy:3,assert:6,idealism:3,strategy:10,humor:2,ambition:7,trust:3,romance:1,protect:3,adventure:5});
+add('Scratchmen Apoo','all',['Worst Generation'],{emotion:6,social:9,attachment:3,independence:8,impulse:8,empathy:2,assert:7,idealism:2,strategy:5,humor:9,ambition:8,trust:2,romance:2,protect:2,adventure:8});
+add('Capone Bege','all',['Worst Generation'],{emotion:3,social:5,attachment:8,independence:8,impulse:3,empathy:5,assert:9,idealism:3,strategy:10,humor:3,ambition:9,trust:5,romance:7,protect:9,adventure:6});
+add('Urouge','all',['Worst Generation'],{emotion:5,social:7,attachment:5,independence:8,impulse:5,empathy:6,assert:8,idealism:6,strategy:6,humor:6,ambition:8,trust:6,romance:2,protect:6,adventure:8});
+add('X Drake','all',['Worst Generation'],{emotion:3,social:4,attachment:4,independence:7,impulse:2,empathy:5,assert:8,idealism:7,strategy:9,humor:2,ambition:7,trust:4,romance:1,protect:6,adventure:6});
+add('Silvers Rayleigh','all',['Pirate'],{emotion:4,social:8,attachment:6,independence:10,impulse:4,empathy:8,assert:10,idealism:7,strategy:10,humor:7,ambition:6,trust:7,romance:5,protect:9,adventure:9});
+add('Gol D. Roger','all',['Pirate'],{emotion:8,social:10,attachment:8,independence:10,impulse:9,empathy:7,assert:10,idealism:9,strategy:7,humor:9,ambition:10,trust:9,romance:5,protect:9,adventure:10});
+add('Edward Newgate','all',['Pirate'],{emotion:6,social:8,attachment:10,independence:9,impulse:4,empathy:9,assert:10,idealism:8,strategy:8,humor:6,ambition:6,trust:8,romance:2,protect:10,adventure:8});
+add('Marco','all',['Pirate'],{emotion:4,social:6,attachment:8,independence:7,impulse:2,empathy:9,assert:7,idealism:8,strategy:9,humor:5,ambition:5,trust:8,romance:2,protect:10,adventure:6});
+add('Donquixote Doflamingo','all',['Antagonist','Warlord'],{emotion:6,social:8,attachment:3,independence:10,impulse:6,empathy:1,assert:10,idealism:1,strategy:10,humor:7,ambition:10,trust:1,romance:2,protect:4,adventure:7});
+add('Crocodile','early',['Antagonist','Warlord'],{emotion:2,social:4,attachment:2,independence:10,impulse:2,empathy:2,assert:10,idealism:2,strategy:10,humor:3,ambition:10,trust:1,romance:1,protect:2,adventure:6});
+add('Enel','early',['Antagonist'],{emotion:5,social:5,attachment:1,independence:10,impulse:6,empathy:1,assert:10,idealism:1,strategy:7,humor:5,ambition:10,trust:1,romance:1,protect:1,adventure:7});
+add('Bon Clay','early',['Ally'],{emotion:10,social:10,attachment:10,independence:8,impulse:8,empathy:10,assert:8,idealism:9,strategy:5,humor:10,ambition:5,trust:9,romance:6,protect:10,adventure:8});
+add('Mr. 3 / Galdino','early',['Antagonist'],{emotion:6,social:5,attachment:4,independence:6,impulse:3,empathy:4,assert:5,idealism:3,strategy:9,humor:7,ambition:7,trust:4,romance:2,protect:4,adventure:5});
+add('Miss Goldenweek','early',['Baroque Works'],{emotion:2,social:3,attachment:4,independence:8,impulse:2,empathy:5,assert:5,idealism:4,strategy:8,humor:5,ambition:3,trust:5,romance:1,protect:4,adventure:5});
+add('Daz Bones','early',['Baroque Works'],{emotion:2,social:3,attachment:5,independence:8,impulse:2,empathy:3,assert:9,idealism:3,strategy:7,humor:2,ambition:8,trust:6,romance:1,protect:5,adventure:6});
+add('Bell-mère','early',['Ally'],{emotion:7,social:7,attachment:10,independence:8,impulse:6,empathy:9,assert:9,idealism:8,strategy:6,humor:7,ambition:5,trust:7,romance:3,protect:10,adventure:6});
+add('Nojiko','early',['Ally'],{emotion:5,social:6,attachment:8,independence:7,impulse:3,empathy:9,assert:7,idealism:7,strategy:7,humor:5,ambition:4,trust:7,romance:3,protect:9,adventure:4});
+add('Genzo','early',['Ally'],{emotion:6,social:6,attachment:8,independence:6,impulse:4,empathy:8,assert:8,idealism:8,strategy:6,humor:5,ambition:4,trust:7,romance:2,protect:10,adventure:3});
+add('Zeff','early',['Ally'],{emotion:5,social:6,attachment:8,independence:8,impulse:5,empathy:8,assert:10,idealism:8,strategy:7,humor:5,ambition:6,trust:7,romance:2,protect:10,adventure:7});
+add('Kuina','early',['Ally'],{emotion:6,social:5,attachment:5,independence:8,impulse:4,empathy:6,assert:8,idealism:7,strategy:6,humor:3,ambition:10,trust:6,romance:1,protect:5,adventure:5});
+add('Makino','early',['Ally'],{emotion:5,social:8,attachment:8,independence:6,impulse:2,empathy:10,assert:5,idealism:8,strategy:6,humor:6,ambition:3,trust:9,romance:4,protect:8,adventure:3});
+add('Dalton','early',['Ally'],{emotion:6,social:6,attachment:8,independence:6,impulse:3,empathy:9,assert:8,idealism:10,strategy:7,humor:3,ambition:5,trust:8,romance:2,protect:10,adventure:4});
+add('Dr. Kureha','early',['Ally'],{emotion:5,social:7,attachment:7,independence:10,impulse:6,empathy:8,assert:10,idealism:7,strategy:9,humor:8,ambition:4,trust:6,romance:2,protect:8,adventure:5});
+add('Dr. Hiriluk','early',['Ally'],{emotion:9,social:8,attachment:8,independence:9,impulse:9,empathy:9,assert:7,idealism:10,strategy:4,humor:8,ambition:7,trust:9,romance:3,protect:9,adventure:8});
+add('Wapol','early',['Antagonist'],{emotion:7,social:6,attachment:2,independence:7,impulse:9,empathy:1,assert:9,idealism:1,strategy:3,humor:7,ambition:9,trust:2,romance:2,protect:1,adventure:5});
+add('Koza','early',['Ally'],{emotion:7,social:7,attachment:8,independence:7,impulse:6,empathy:8,assert:9,idealism:10,strategy:6,humor:3,ambition:6,trust:7,romance:4,protect:10,adventure:5});
+add('Pell','early',['Ally'],{emotion:4,social:5,attachment:9,independence:5,impulse:3,empathy:8,assert:8,idealism:9,strategy:7,humor:2,ambition:4,trust:9,romance:2,protect:10,adventure:5});
+add('Conis','early',['Skypiea'],{emotion:8,social:6,attachment:8,independence:5,impulse:3,empathy:10,assert:5,idealism:9,strategy:6,humor:4,ambition:4,trust:8,romance:3,protect:8,adventure:5});
+add('Pagaya','early',['Skypiea'],{emotion:5,social:6,attachment:8,independence:5,impulse:2,empathy:9,assert:4,idealism:8,strategy:7,humor:6,ambition:3,trust:8,romance:2,protect:8,adventure:4});
+add('Gan Fall','early',['Skypiea'],{emotion:5,social:7,attachment:7,independence:8,impulse:3,empathy:9,assert:8,idealism:10,strategy:8,humor:5,ambition:5,trust:8,romance:2,protect:10,adventure:6});
+add('Wyper','early',['Skypiea'],{emotion:7,social:4,attachment:8,independence:9,impulse:8,empathy:6,assert:10,idealism:10,strategy:6,humor:2,ambition:7,trust:3,romance:2,protect:10,adventure:7});
+add('Aisa','early',['Skypiea'],{emotion:9,social:6,attachment:8,independence:7,impulse:6,empathy:9,assert:7,idealism:8,strategy:5,humor:5,ambition:4,trust:5,romance:1,protect:8,adventure:6});
+add('Mont Blanc Cricket','early',['Jaya'],{emotion:5,social:6,attachment:7,independence:9,impulse:5,empathy:7,assert:8,idealism:9,strategy:7,humor:5,ambition:8,trust:6,romance:2,protect:7,adventure:9});
+add('Masira','early',['Jaya'],{emotion:7,social:9,attachment:7,independence:7,impulse:8,empathy:7,assert:8,idealism:7,strategy:4,humor:9,ambition:6,trust:8,romance:2,protect:7,adventure:9});
+add('Shoujou','early',['Jaya'],{emotion:7,social:8,attachment:7,independence:7,impulse:7,empathy:7,assert:7,idealism:7,strategy:5,humor:9,ambition:6,trust:8,romance:2,protect:7,adventure:9});
+add('Bellamy','early',['Pirate'],{emotion:7,social:7,attachment:5,independence:7,impulse:8,empathy:3,assert:9,idealism:3,strategy:4,humor:5,ambition:8,trust:4,romance:2,protect:5,adventure:7});
+add('Blackbeard','early',['Pirate','Antagonist'],{emotion:8,social:9,attachment:4,independence:10,impulse:8,empathy:2,assert:9,idealism:5,strategy:8,humor:9,ambition:10,trust:2,romance:2,protect:3,adventure:10});
+// Later / broad pool
+add('Koala','all',['Revolutionary'],{emotion:7,social:8,attachment:8,independence:7,impulse:4,empathy:10,assert:7,idealism:10,strategy:7,humor:7,ambition:7,trust:7,romance:4,protect:9,adventure:7});
+add('Emporio Ivankov','all',['Revolutionary'],{emotion:9,social:10,attachment:7,independence:10,impulse:8,empathy:8,assert:10,idealism:10,strategy:7,humor:10,ambition:7,trust:8,romance:5,protect:9,adventure:9});
+add('Monkey D. Dragon','all',['Revolutionary'],{emotion:2,social:4,attachment:5,independence:10,impulse:2,empathy:7,assert:10,idealism:10,strategy:10,humor:2,ambition:10,trust:4,romance:1,protect:8,adventure:7});
+add('Bartolomeo','all',['Grand Fleet'],{emotion:10,social:9,attachment:10,independence:7,impulse:9,empathy:7,assert:9,idealism:7,strategy:4,humor:10,ambition:6,trust:8,romance:5,protect:10,adventure:9});
+add('Cavendish','all',['Grand Fleet'],{emotion:8,social:10,attachment:5,independence:8,impulse:7,empathy:5,assert:9,idealism:6,strategy:6,humor:8,ambition:10,trust:5,romance:7,protect:6,adventure:8});
+add('Rebecca','all',['Dressrosa'],{emotion:9,social:6,attachment:9,independence:5,impulse:3,empathy:10,assert:5,idealism:9,strategy:6,humor:4,ambition:5,trust:8,romance:4,protect:8,adventure:4});
+add('Kyros','all',['Dressrosa'],{emotion:6,social:4,attachment:10,independence:7,impulse:4,empathy:8,assert:10,idealism:9,strategy:8,humor:2,ambition:5,trust:7,romance:6,protect:10,adventure:5});
+add('Viola','all',['Dressrosa'],{emotion:7,social:7,attachment:8,independence:7,impulse:4,empathy:8,assert:8,idealism:8,strategy:8,humor:4,ambition:5,trust:5,romance:7,protect:9,adventure:5});
+add('Baby 5','all',['Donquixote Family'],{emotion:10,social:7,attachment:10,independence:3,impulse:8,empathy:8,assert:5,idealism:5,strategy:4,humor:7,ambition:4,trust:10,romance:10,protect:9,adventure:6});
+add('Sugar','all',['Donquixote Family'],{emotion:5,social:3,attachment:2,independence:7,impulse:4,empathy:2,assert:7,idealism:2,strategy:8,humor:4,ambition:5,trust:2,romance:1,protect:2,adventure:3});
+add('Senor Pink','all',['Donquixote Family'],{emotion:6,social:6,attachment:9,independence:8,impulse:5,empathy:7,assert:9,idealism:6,strategy:6,humor:7,ambition:5,trust:7,romance:9,protect:9,adventure:6});
+add('Corazon','all',['Donquixote Family'],{emotion:7,social:4,attachment:9,independence:7,impulse:5,empathy:10,assert:7,idealism:9,strategy:8,humor:6,ambition:4,trust:6,romance:3,protect:10,adventure:5});
+add('Charlotte Pudding','all',['Whole Cake'],{emotion:10,social:7,attachment:9,independence:5,impulse:7,empathy:7,assert:7,idealism:5,strategy:8,humor:7,ambition:5,trust:3,romance:10,protect:8,adventure:4});
+add('Charlotte Katakuri','all',['Whole Cake'],{emotion:3,social:4,attachment:9,independence:8,impulse:2,empathy:7,assert:10,idealism:7,strategy:9,humor:2,ambition:8,trust:6,romance:2,protect:10,adventure:6});
+add('Charlotte Brûlée','all',['Whole Cake'],{emotion:7,social:6,attachment:9,independence:6,impulse:5,empathy:6,assert:7,idealism:5,strategy:6,humor:6,ambition:4,trust:6,romance:3,protect:9,adventure:5});
+add('Charlotte Linlin','all',['Emperor','Antagonist'],{emotion:10,social:8,attachment:7,independence:10,impulse:10,empathy:2,assert:10,idealism:5,strategy:5,humor:7,ambition:10,trust:4,romance:4,protect:6,adventure:8});
+add('Carrot','all',['Mink'],{emotion:9,social:9,attachment:8,independence:7,impulse:8,empathy:9,assert:7,idealism:9,strategy:5,humor:9,ambition:6,trust:9,romance:3,protect:9,adventure:10});
+add('Pedro','all',['Mink'],{emotion:4,social:5,attachment:8,independence:8,impulse:3,empathy:8,assert:9,idealism:10,strategy:8,humor:3,ambition:6,trust:8,romance:2,protect:10,adventure:8});
+add('Wanda','all',['Mink'],{emotion:6,social:7,attachment:8,independence:7,impulse:4,empathy:9,assert:7,idealism:8,strategy:7,humor:5,ambition:5,trust:8,romance:3,protect:9,adventure:7});
+add('Yamato','all',['Wano'],{emotion:9,social:8,attachment:8,independence:10,impulse:8,empathy:9,assert:9,idealism:10,strategy:5,humor:8,ambition:9,trust:9,romance:3,protect:10,adventure:10});
+add('Kozuki Oden','all',['Wano'],{emotion:9,social:10,attachment:9,independence:10,impulse:10,empathy:9,assert:10,idealism:9,strategy:5,humor:9,ambition:9,trust:9,romance:7,protect:10,adventure:10});
+add('Kozuki Hiyori','all',['Wano'],{emotion:7,social:7,attachment:8,independence:8,impulse:4,empathy:8,assert:8,idealism:8,strategy:8,humor:5,ambition:6,trust:5,romance:6,protect:8,adventure:5});
+add('Kozuki Momonosuke','all',['Wano'],{emotion:9,social:6,attachment:8,independence:5,impulse:6,empathy:7,assert:5,idealism:9,strategy:5,humor:7,ambition:8,trust:8,romance:5,protect:8,adventure:6});
+add('Kin’emon','all',['Wano'],{emotion:7,social:7,attachment:9,independence:6,impulse:6,empathy:7,assert:9,idealism:9,strategy:6,humor:8,ambition:6,trust:8,romance:7,protect:10,adventure:6});
+add('Kiku','all',['Wano'],{emotion:6,social:6,attachment:8,independence:6,impulse:3,empathy:9,assert:7,idealism:9,strategy:7,humor:4,ambition:5,trust:8,romance:3,protect:9,adventure:5});
+add('Tama','all',['Wano'],{emotion:9,social:8,attachment:9,independence:5,impulse:6,empathy:10,assert:6,idealism:10,strategy:5,humor:7,ambition:6,trust:10,romance:1,protect:8,adventure:7});
+add('Kaido','all',['Emperor','Antagonist'],{emotion:7,social:5,attachment:3,independence:10,impulse:8,empathy:2,assert:10,idealism:3,strategy:7,humor:5,ambition:10,trust:2,romance:2,protect:4,adventure:9});
+add('King','all',['Beasts Pirates'],{emotion:2,social:3,attachment:7,independence:8,impulse:2,empathy:4,assert:9,idealism:4,strategy:8,humor:2,ambition:7,trust:6,romance:1,protect:8,adventure:6});
+add('Queen','all',['Beasts Pirates'],{emotion:8,social:10,attachment:3,independence:8,impulse:9,empathy:2,assert:9,idealism:2,strategy:7,humor:10,ambition:9,trust:2,romance:4,protect:3,adventure:8});
+add('Ulti','all',['Beasts Pirates'],{emotion:10,social:7,attachment:10,independence:7,impulse:10,empathy:5,assert:10,idealism:4,strategy:4,humor:8,ambition:6,trust:6,romance:3,protect:10,adventure:7});
+add('Page One','all',['Beasts Pirates'],{emotion:5,social:4,attachment:8,independence:6,impulse:4,empathy:5,assert:6,idealism:4,strategy:6,humor:5,ambition:5,trust:6,romance:2,protect:7,adventure:6});
+add('Nefertari Cobra','early',['Alabasta'],{emotion:5,social:7,attachment:9,independence:6,impulse:2,empathy:10,assert:7,idealism:10,strategy:8,humor:5,ambition:5,trust:8,romance:4,protect:10,adventure:3});
+add('Iceburg','all',['Water 7'],{emotion:4,social:7,attachment:7,independence:8,impulse:3,empathy:8,assert:8,idealism:8,strategy:9,humor:6,ambition:8,trust:5,romance:2,protect:8,adventure:4});
+add('Paulie','all',['Water 7'],{emotion:7,social:6,attachment:7,independence:7,impulse:6,empathy:7,assert:9,idealism:8,strategy:6,humor:7,ambition:6,trust:7,romance:3,protect:9,adventure:6});
+add('Kokoro','all',['Water 7'],{emotion:6,social:8,attachment:8,independence:9,impulse:5,empathy:8,assert:8,idealism:7,strategy:7,humor:9,ambition:4,trust:7,romance:3,protect:8,adventure:6});
+add('Chimney','all',['Water 7'],{emotion:8,social:9,attachment:7,independence:8,impulse:10,empathy:7,assert:7,idealism:7,strategy:4,humor:10,ambition:4,trust:9,romance:1,protect:6,adventure:10});
+add('Kalifa','all',['CP9'],{emotion:3,social:6,attachment:3,independence:8,impulse:2,empathy:3,assert:9,idealism:3,strategy:9,humor:5,ambition:8,trust:4,romance:3,protect:3,adventure:5});
+add('Rob Lucci','all',['CP9','Antagonist'],{emotion:1,social:2,attachment:2,independence:9,impulse:3,empathy:1,assert:10,idealism:2,strategy:9,humor:1,ambition:8,trust:3,romance:1,protect:2,adventure:6});
+add('Kaku','all',['CP9'],{emotion:5,social:7,attachment:5,independence:7,impulse:4,empathy:5,assert:7,idealism:4,strategy:8,humor:7,ambition:7,trust:5,romance:2,protect:5,adventure:7});
+add('Spandam','all',['CP9','Antagonist'],{emotion:8,social:5,attachment:2,independence:5,impulse:7,empathy:1,assert:7,idealism:1,strategy:4,humor:6,ambition:9,trust:1,romance:1,protect:1,adventure:3});
+add('Gecko Moria','all',['Warlord','Antagonist'],{emotion:7,social:6,attachment:6,independence:8,impulse:6,empathy:3,assert:8,idealism:3,strategy:7,humor:8,ambition:9,trust:4,romance:2,protect:5,adventure:6});
+add('Absalom','all',['Thriller Bark'],{emotion:6,social:5,attachment:3,independence:7,impulse:8,empathy:2,assert:7,idealism:2,strategy:5,humor:6,ambition:6,trust:3,romance:8,protect:3,adventure:5});
+add('Dr. Hogback','all',['Thriller Bark'],{emotion:7,social:6,attachment:5,independence:7,impulse:6,empathy:2,assert:6,idealism:2,strategy:8,humor:7,ambition:9,trust:3,romance:7,protect:2,adventure:5});
+add('Camie','all',['Fish-Man Island'],{emotion:9,social:9,attachment:8,independence:6,impulse:7,empathy:10,assert:4,idealism:9,strategy:4,humor:8,ambition:6,trust:10,romance:4,protect:6,adventure:8});
+add('Hatchan','all',['Fish-Man Island'],{emotion:7,social:8,attachment:8,independence:6,impulse:5,empathy:9,assert:5,idealism:8,strategy:5,humor:8,ambition:5,trust:8,romance:3,protect:8,adventure:7});
+add('Shirahoshi','all',['Fish-Man Island'],{emotion:10,social:4,attachment:10,independence:3,impulse:3,empathy:10,assert:3,idealism:10,strategy:5,humor:5,ambition:4,trust:9,romance:6,protect:8,adventure:4});
+add('Fisher Tiger','all',['Fish-Man Island'],{emotion:6,social:6,attachment:8,independence:10,impulse:5,empathy:8,assert:10,idealism:9,strategy:7,humor:3,ambition:7,trust:3,romance:2,protect:10,adventure:8});
+add('Queen Otohime','all',['Fish-Man Island'],{emotion:9,social:9,attachment:10,independence:7,impulse:5,empathy:10,assert:8,idealism:10,strategy:7,humor:5,ambition:8,trust:10,romance:6,protect:10,adventure:5});
+add('Hody Jones','all',['Antagonist'],{emotion:6,social:6,attachment:2,independence:8,impulse:8,empathy:1,assert:10,idealism:1,strategy:6,humor:2,ambition:9,trust:2,romance:1,protect:2,adventure:5});
+add('Caesar Clown','all',['Antagonist'],{emotion:8,social:8,attachment:2,independence:8,impulse:7,empathy:1,assert:7,idealism:1,strategy:9,humor:9,ambition:9,trust:1,romance:2,protect:1,adventure:6});
+add('Monet','all',['Punk Hazard'],{emotion:3,social:5,attachment:6,independence:6,impulse:2,empathy:3,assert:7,idealism:3,strategy:8,humor:4,ambition:6,trust:6,romance:3,protect:6,adventure:5});
+
+add('Fujitora','all',['Marine'],{emotion:4,social:6,attachment:5,independence:9,impulse:2,empathy:10,assert:9,idealism:10,strategy:9,humor:5,ambition:5,trust:6,romance:2,protect:9,adventure:6});
+add('Garp','all',['Marine'],{emotion:7,social:9,attachment:8,independence:10,impulse:8,empathy:7,assert:10,idealism:8,strategy:7,humor:10,ambition:7,trust:8,romance:2,protect:9,adventure:9});
+add('Sengoku','all',['Marine'],{emotion:5,social:6,attachment:6,independence:7,impulse:3,empathy:6,assert:9,idealism:7,strategy:10,humor:5,ambition:8,trust:6,romance:2,protect:7,adventure:5});
+add('Kuzan','all',['Marine'],{emotion:3,social:6,attachment:5,independence:10,impulse:2,empathy:8,assert:7,idealism:8,strategy:9,humor:6,ambition:5,trust:5,romance:3,protect:7,adventure:7});
+add('Kizaru','all',['Marine'],{emotion:1,social:6,attachment:2,independence:8,impulse:2,empathy:3,assert:8,idealism:4,strategy:8,humor:7,ambition:6,trust:4,romance:1,protect:4,adventure:5});
+add('Akainu','all',['Marine','Antagonist'],{emotion:4,social:3,attachment:2,independence:8,impulse:4,empathy:1,assert:10,idealism:8,strategy:8,humor:1,ambition:9,trust:3,romance:1,protect:5,adventure:5});
+add('Hina','all',['Marine'],{emotion:3,social:6,attachment:5,independence:8,impulse:2,empathy:5,assert:9,idealism:7,strategy:8,humor:4,ambition:7,trust:6,romance:3,protect:6,adventure:5});
+add('Coby','all',['Marine'],{emotion:8,social:6,attachment:7,independence:6,impulse:4,empathy:10,assert:7,idealism:10,strategy:7,humor:4,ambition:10,trust:8,romance:2,protect:10,adventure:7});
+add('Sentomaru','all',['Marine'],{emotion:4,social:5,attachment:6,independence:7,impulse:3,empathy:6,assert:9,idealism:7,strategy:7,humor:4,ambition:6,trust:7,romance:1,protect:8,adventure:5});
+add('Magellan','all',['Impel Down'],{emotion:5,social:3,attachment:5,independence:7,impulse:3,empathy:5,assert:9,idealism:8,strategy:8,humor:5,ambition:6,trust:6,romance:2,protect:8,adventure:3});
+add('Hannyabal','all',['Impel Down'],{emotion:8,social:7,attachment:5,independence:6,impulse:6,empathy:6,assert:7,idealism:8,strategy:5,humor:8,ambition:10,trust:6,romance:2,protect:7,adventure:4});
+add('Bentham / Bon Clay','all',['Impel Down'],{emotion:10,social:10,attachment:10,independence:8,impulse:8,empathy:10,assert:8,idealism:9,strategy:5,humor:10,ambition:5,trust:9,romance:6,protect:10,adventure:8});
+add('Marguerite','all',['Amazon Lily'],{emotion:6,social:6,attachment:7,independence:7,impulse:3,empathy:9,assert:6,idealism:8,strategy:6,humor:5,ambition:4,trust:8,romance:4,protect:8,adventure:5});
+add('Sandersonia','all',['Amazon Lily'],{emotion:5,social:6,attachment:9,independence:6,impulse:3,empathy:7,assert:7,idealism:6,strategy:7,humor:4,ambition:5,trust:7,romance:3,protect:9,adventure:5});
+add('Marigold','all',['Amazon Lily'],{emotion:5,social:6,attachment:9,independence:6,impulse:4,empathy:7,assert:8,idealism:6,strategy:6,humor:4,ambition:5,trust:7,romance:3,protect:9,adventure:5});
+add('Reiju','all',['Germa'],{emotion:4,social:6,attachment:7,independence:8,impulse:2,empathy:9,assert:7,idealism:7,strategy:9,humor:4,ambition:5,trust:5,romance:4,protect:9,adventure:5});
+add('Judge','all',['Germa','Antagonist'],{emotion:4,social:4,attachment:2,independence:9,impulse:4,empathy:1,assert:10,idealism:2,strategy:9,humor:1,ambition:10,trust:2,romance:1,protect:3,adventure:5});
+add('Vinsmoke Yonji','all',['Germa'],{emotion:6,social:6,attachment:4,independence:7,impulse:8,empathy:2,assert:8,idealism:3,strategy:4,humor:6,ambition:7,trust:4,romance:4,protect:4,adventure:6});
+add('Pekoms','all',['Mink'],{emotion:6,social:6,attachment:8,independence:6,impulse:5,empathy:7,assert:8,idealism:6,strategy:6,humor:6,ambition:5,trust:7,romance:2,protect:9,adventure:6});
+add('Morgans','all',['World Economy News'],{emotion:7,social:10,attachment:2,independence:9,impulse:8,empathy:3,assert:9,idealism:5,strategy:8,humor:9,ambition:10,trust:2,romance:2,protect:2,adventure:8});
+add('Vegapunk','all',['Scientist'],{emotion:5,social:7,attachment:5,independence:9,impulse:6,empathy:7,assert:6,idealism:9,strategy:10,humor:8,ambition:10,trust:7,romance:1,protect:7,adventure:9});
+add('Jewelry Bonney','all',['Worst Generation'],{emotion:8,social:7,attachment:8,independence:9,impulse:9,empathy:8,assert:9,idealism:7,strategy:5,humor:7,ambition:7,trust:5,romance:2,protect:9,adventure:9});
+add('Kuma','all',['Revolutionary'],{emotion:2,social:3,attachment:9,independence:7,impulse:1,empathy:10,assert:7,idealism:10,strategy:8,humor:1,ambition:5,trust:8,romance:6,protect:10,adventure:5});
+add('Bepo','all',['Heart Pirates'],{emotion:9,social:7,attachment:10,independence:4,impulse:5,empathy:9,assert:4,idealism:7,strategy:5,humor:8,ambition:5,trust:9,romance:2,protect:8,adventure:7});
+add('Penguin','all',['Heart Pirates'],{emotion:5,social:7,attachment:8,independence:6,impulse:4,empathy:7,assert:6,idealism:6,strategy:7,humor:7,ambition:5,trust:8,romance:2,protect:8,adventure:7});
+add('Shachi','all',['Heart Pirates'],{emotion:6,social:8,attachment:8,independence:6,impulse:5,empathy:7,assert:6,idealism:6,strategy:6,humor:8,ambition:5,trust:8,romance:2,protect:8,adventure:7});
+add('Kaya','early',['East Blue'],{emotion:7,social:5,attachment:8,independence:5,impulse:2,empathy:10,assert:4,idealism:9,strategy:7,humor:4,ambition:7,trust:8,romance:6,protect:6,adventure:4});
+add('Johnny','early',['East Blue'],{emotion:7,social:8,attachment:8,independence:6,impulse:7,empathy:7,assert:7,idealism:6,strategy:4,humor:8,ambition:5,trust:8,romance:3,protect:8,adventure:7});
+add('Yosaku','early',['East Blue'],{emotion:7,social:8,attachment:8,independence:6,impulse:7,empathy:7,assert:7,idealism:6,strategy:4,humor:8,ambition:5,trust:8,romance:3,protect:8,adventure:7});
+add('Patty','early',['Baratie'],{emotion:7,social:9,attachment:6,independence:7,impulse:8,empathy:6,assert:9,idealism:6,strategy:4,humor:9,ambition:5,trust:7,romance:2,protect:7,adventure:5});
+add('Gin','early',['Baratie'],{emotion:6,social:4,attachment:7,independence:7,impulse:5,empathy:7,assert:8,idealism:6,strategy:7,humor:2,ambition:6,trust:5,romance:2,protect:8,adventure:6});
+add('Arlong','early',['Antagonist'],{emotion:6,social:6,attachment:5,independence:9,impulse:7,empathy:2,assert:10,idealism:3,strategy:7,humor:4,ambition:9,trust:4,romance:1,protect:6,adventure:6});
+add('Hachi','early',['Arlong Pirates'],{emotion:7,social:8,attachment:7,independence:6,impulse:6,empathy:7,assert:6,idealism:6,strategy:4,humor:8,ambition:5,trust:7,romance:2,protect:7,adventure:7});
+add('Kuro','early',['Antagonist'],{emotion:2,social:4,attachment:1,independence:9,impulse:2,empathy:1,assert:9,idealism:1,strategy:10,humor:2,ambition:8,trust:1,romance:1,protect:1,adventure:4});
+add('Alvida','early',['Pirate'],{emotion:7,social:8,attachment:3,independence:9,impulse:7,empathy:2,assert:10,idealism:2,strategy:4,humor:7,ambition:9,trust:3,romance:5,protect:2,adventure:7});
+add('Mohji','early',['Buggy Pirates'],{emotion:6,social:6,attachment:6,independence:5,impulse:6,empathy:4,assert:6,idealism:3,strategy:4,humor:7,ambition:5,trust:6,romance:2,protect:6,adventure:6});
+add('Cabaji','early',['Buggy Pirates'],{emotion:5,social:6,attachment:5,independence:6,impulse:5,empathy:3,assert:7,idealism:3,strategy:6,humor:6,ambition:6,trust:5,romance:2,protect:5,adventure:6});
+add('Richie','early',['Buggy Pirates'],{emotion:6,social:5,attachment:6,independence:4,impulse:7,empathy:4,assert:6,idealism:3,strategy:2,humor:8,ambition:4,trust:6,romance:1,protect:5,adventure:5});
+
+// Hand-tuned distinctive traits for characters where the broad-profile derivation loses important personality texture.
+const OV={
+'Nami':{express:9,sensitivity:8,reassurance:5,stubborn:9,duty:9,optimism:6,avoidance:3,confidence:8,defensive:7,humor:7},
+'Tony Tony Chopper':{express:10,sensitivity:9,reassurance:9,stubborn:5,duty:8,optimism:8,avoidance:5,confidence:4,defensive:3,humor:8},
+'Perona':{express:10,sensitivity:8,reassurance:7,stubborn:9,duty:4,optimism:2,avoidance:5,confidence:7,defensive:8,humor:9},
+'Charlotte Pudding':{express:9,sensitivity:10,reassurance:10,stubborn:7,duty:6,optimism:4,avoidance:6,confidence:4,defensive:10,humor:6},
+'Rebecca':{express:8,sensitivity:10,reassurance:7,stubborn:5,duty:8,optimism:7,avoidance:8,confidence:4,defensive:4,humor:3},
+'Viola':{express:7,sensitivity:8,reassurance:5,stubborn:7,duty:9,optimism:5,avoidance:5,confidence:7,defensive:7,humor:4},
+'Vivi':{express:8,sensitivity:8,reassurance:5,stubborn:8,duty:10,optimism:8,avoidance:3,confidence:7,defensive:4,humor:6},
+'Shirahoshi':{express:10,sensitivity:10,reassurance:9,stubborn:4,duty:7,optimism:7,avoidance:8,confidence:3,defensive:2,humor:5},
+'Usopp':{express:10,sensitivity:8,reassurance:7,stubborn:6,duty:5,optimism:6,avoidance:7,confidence:3,defensive:7,humor:10},
+'Sanji':{express:9,sensitivity:8,reassurance:5,stubborn:8,duty:10,optimism:7,avoidance:4,confidence:7,defensive:7,humor:8}
+};
+C.forEach(c=>{if(OV[c.name]) c.v=V({...c.v,...OV[c.name]});});
+// v9 developed-character nuance audit: traits that broad 15-axis profiles cannot safely infer.
+const OV9={
+'Boa Hancock':{express:7,sensitivity:6,reassurance:4,stubborn:10,duty:6,optimism:5,avoidance:2,confidence:10,defensive:8,empathy:3,assert:10,independence:9,trust:3},
+'Baby 5':{express:9,sensitivity:9,reassurance:10,stubborn:5,duty:6,optimism:6,avoidance:6,confidence:3,defensive:5,trust:7},
+'Corazon':{express:5,sensitivity:8,reassurance:3,stubborn:8,duty:9,optimism:6,avoidance:4,confidence:7,defensive:6,humor:6},
+'Koala':{express:7,sensitivity:7,reassurance:4,stubborn:7,duty:9,optimism:7,avoidance:3,confidence:7,defensive:5},
+'Bartolomeo':{express:10,sensitivity:7,reassurance:7,stubborn:9,duty:5,optimism:7,avoidance:1,confidence:8,defensive:7},
+'Bon Clay':{express:10,sensitivity:8,reassurance:5,stubborn:8,duty:7,optimism:9,avoidance:1,confidence:9,defensive:3}
+};
+C.forEach(c=>{if(OV9[c.name]) c.v=V({...c.v,...OV9[c.name]});});
+
+// v8: characterization confidence. Minor characters stay in the pool, but sparse canon
+// evidence is treated as uncertainty rather than invented personality detail.
+const DEEP_PROFILE=new Set(['Monkey D. Luffy','Roronoa Zoro','Nami','Usopp','Sanji','Tony Tony Chopper','Nico Robin','Vivi','Shanks','Buggy','Koby','Smoker','Tashigi','Dracule Mihawk','Boa Hancock','Perona','Brook','Franky','Jinbe','Portgas D. Ace','Sabo','Trafalgar Law','Eustass Kid','Silvers Rayleigh','Gol D. Roger','Edward Newgate','Donquixote Doflamingo','Crocodile','Bon Clay','Emporio Ivankov','Bartolomeo','Rebecca','Kyros','Viola','Baby 5','Corazon','Charlotte Pudding','Charlotte Katakuri','Charlotte Linlin','Carrot','Yamato','Kozuki Oden','Kaido','Gecko Moria','Shirahoshi']);
+const SOLID_PROFILE=new Set(['Karoo','Helmeppo','Killer','Jewelry Bonney','Capone Bege','Marco','Bell-mère','Zeff','Dr. Kureha','Dr. Hiriluk','Koza','Gan Fall','Wyper','Blackbeard','Koala','Cavendish','Senor Pink','Charlotte Brûlée','Pedro','Wanda','Kozuki Hiyori','Kozuki Momonosuke','Kin’emon','Kiku','Tama','King','Queen','Ulti','Nefertari Cobra','Iceburg','Paulie','Kokoro','Rob Lucci','Kaku','Hachi','Arlong','Alvida']);
+const profileConfidence=c=>DEEP_PROFILE.has(c.name)?1:SOLID_PROFILE.has(c.name)?.88:OV[c.name]?.84:.68;
+const confidenceLabel=q=>q>=.95?'well-developed profile':q>=.82?'solid profile':'limited canon profile';
+
+const answers=Array.from({length:Q.length},()=>[]); let idx=0; let profile=V(Object.fromEntries(T.map(k=>[k,5])));
+const $=s=>document.querySelector(s);
+$('#start').onclick=()=>{ if(!$('#name').value.trim()) $('#name').value='Anonymous Pirate'; $('#intro').classList.add('hidden');$('#quiz').classList.remove('hidden');render(); };
+function render(){ const [q,opts]=Q[idx]; const multi=idx<20; $('#counter').textContent=`Question ${idx+1} of ${Q.length}`;$('#qnum').textContent=multi?'Personality':'Quick pick';$('#question').textContent=q;$('#selectHint').textContent=multi?'Select up to 2 answers.':'Choose 1 answer.';$('#bar').style.width=`${(idx/Q.length)*100}%`; const a=$('#answers');a.innerHTML='';opts.forEach((o,i)=>{const b=document.createElement('button');const selected=answers[idx].includes(i);b.className='ans'+(selected?' selected':'');b.textContent=o[0];b.onclick=()=>{if(multi){if(selected){answers[idx]=answers[idx].filter(x=>x!==i);}else if(answers[idx].length<2){answers[idx]=[...answers[idx],i];}}else{answers[idx]=[i];}render();};a.appendChild(b)});$('#back').disabled=idx===0;$('#next').disabled=answers[idx].length===0;$('#next').textContent=idx===Q.length-1?'See my results ♡':'Next →';}
+$('#back').onclick=()=>{if(idx>0){idx--;render()}}; $('#next').onclick=()=>{if(answers[idx].length===0)return;if(idx<Q.length-1){idx++;render()}else finish()};
+// v11: data-driven trait distinctiveness. A trait direction that many characters share
+// (for example, broadly caring/protective highs) carries less identifying power than a rarer
+// fingerprint. This changes ranking evidence, not the user's answers.
+function traitDistinctiveness(c,k){
+ const cd=c.v[k]-5;if(Math.abs(cd)<2.15)return 1;
+ const sign=Math.sign(cd);let same=0,defined=0;
+ C.forEach(x=>{const d=x.v[k]-5;if(Math.abs(d)>=2.15){defined++;if(Math.sign(d)===sign)same++;}});
+ if(!defined)return 1;
+ const prevalence=same/defined;
+ return 0.78+0.62*(1-prevalence); // common directions ~0.8–1.0; rare directions up to ~1.4
+}
+
+// v12: identity-weighted matching.
+// A character's most extreme, distinctive traits count as their "core identity".
+// Opposing a core trait hurts much more than merely differing on a secondary trait.
+// This prevents broad overlap (e.g. emotional + romantic) from overpowering a major
+// personality contradiction (e.g. very low vs very high empathy/assertiveness).
+const TRAIT_CLUSTER={attachment:'bond',romance:'bond',reassurance:'bond',protect:'bond',empathy:'care',sensitivity:'care',emotion:'affect',express:'affect',defensive:'affect',assert:'agency',stubborn:'agency',independence:'agency',duty:'conscience',idealism:'conscience',strategy:'cognition',trust:'cognition',impulse:'tempo',adventure:'novelty',social:'social',humor:'social',confidence:'self',ambition:'self',optimism:'outlook',avoidance:'conflict'};
+function clusterDiscount(k){const c=TRAIT_CLUSTER[k];return ['bond','care','affect','agency','conscience','cognition','social','self'].includes(c)?.82:1;}
+function identityTraits(c){
+ const ranked=T.map(k=>{
+   const strength=Math.abs(c.v[k]-5);
+   return {k,strength,weight:strength*traitDistinctiveness(c,k)*(TRAIT_ROLE_WEIGHT?.[k]||1)};
+ }).filter(z=>z.strength>=2.15).sort((a,b)=>b.weight-a.weight);
+ const n=Math.min(6,Math.max(4,Math.ceil(ranked.length*.42)));
+ const chosen=[], counts={};
+ for(const z of ranked){const g=TRAIT_CLUSTER[z.k]||z.k;if((counts[g]||0)>=2)continue;chosen.push(z.k);counts[g]=(counts[g]||0)+1;if(chosen.length>=n)break;}
+ return new Set(chosen);
+}
+function traitWord(k,high){
+ const words={
+  emotion:['emotionally steady','emotionally intense'],social:['reserved','socially outgoing'],
+  attachment:['self-contained in closeness','strongly attachment-oriented'],independence:['interdependent','fiercely independent'],
+  impulse:['deliberate','impulsive'],empathy:['low-empathy / emotionally selective','highly empathetic'],
+  assert:['non-confrontational','assertive'],idealism:['pragmatic / morally flexible','idealistic'],
+  strategy:['instinctive','strategic'],humor:['serious','playful'],ambition:['low-key','ambitious'],
+  trust:['guarded','trusting'],romance:['not romance-driven','romantic'],protect:['hands-off','protective'],
+  adventure:['comfort-seeking','adventurous'],express:['emotionally private','emotionally expressive'],
+  sensitivity:['thick-skinned','sensitive'],reassurance:['low-reassurance','reassurance-seeking'],
+  stubborn:['flexible','stubborn'],duty:['low-duty / freeform','responsible'],
+  optimism:['pessimistic / wary','optimistic'],avoidance:['confrontational','conflict-avoidant'],
+  confidence:['self-doubting','self-confident'],defensive:['emotionally open','defensive']
+ };
+ return (words[k]||[k,k])[high?1:0];
+}
+function naturalList(a){
+ if(!a.length)return '';
+ if(a.length===1)return a[0];
+ if(a.length===2)return a[0]+' and '+a[1];
+ return a.slice(0,-1).join(', ')+', and '+a[a.length-1];
+}
+
+// v18: identity-first whole-person scoring.
+// Temperament and relational style are more diagnostic than generic goodness, duty, or competence.
+const TRAIT_ROLE_WEIGHT={emotion:1.42,social:1.28,attachment:1.28,independence:1.16,impulse:1.30,empathy:.82,assert:1.25,idealism:.68,strategy:.82,humor:1.38,ambition:.86,trust:1.08,romance:1.12,protect:.82,adventure:.88,express:1.42,sensitivity:1.30,reassurance:1.20,stubborn:1.28,duty:.62,optimism:1.28,avoidance:1.12,confidence:1.20,defensive:1.40};
+const MACRO_ROLE_WEIGHT={closeness:1.22,emotionality:1.45,warmth:.72,agency:1.22,conscience:.58,guardedness:1.34,novelty:1.02,social:1.28,play:1.34,devotion:1.02};
+const ARCHETYPE_ROLE_WEIGHT={'soft-intense':1.32,'guarded-soft':1.38,forceful:1.16,caretaker:.66,'free-spirit':1.02,strategist:.84,romantic:1.02,playful:1.30};
+
+// v17: discriminating whole-person scoring.
+// Separate raw resemblance, identity-defining fit, archetype/pattern fit, contradictions,
+// and canon evidence. High percentages are intentionally rare.
+const MACROS={
+ closeness:{label:'Closeness style',calc:v=>(v.attachment*1.15+v.reassurance*.85+v.romance*.65+(10-v.independence)*.35)/3},
+ emotionality:{label:'Emotional style',calc:v=>(v.emotion+v.express*.8+v.sensitivity*.75+v.defensive*.35)/2.9},
+ warmth:{label:'Warmth / care',calc:v=>(v.empathy*1.15+v.protect*.75+v.sensitivity*.35)/2.25},
+ agency:{label:'Agency / forcefulness',calc:v=>(v.assert+v.stubborn*.65+v.confidence*.55)/2.2},
+ conscience:{label:'Conscience / responsibility',calc:v=>(v.duty*1.05+v.idealism*.8+v.empathy*.35)/2.2},
+ guardedness:{label:'Guardedness',calc:v=>((10-v.trust)*.8+v.defensive*.85+v.avoidance*.35)/2},
+ novelty:{label:'Novelty / spontaneity',calc:v=>(v.adventure+v.impulse*.7+(10-v.strategy)*.25)/1.95},
+ social:{label:'Social energy',calc:v=>(v.social*.9+v.humor*.35+v.express*.25)/1.5},
+ play:{label:'Playfulness',calc:v=>(v.humor*.8+v.express*.2+v.impulse*.15)/1.15},
+ devotion:{label:'Romantic devotion',calc:v=>(v.romance+v.attachment*.7+v.protect*.35)/2.05}
+};
+const macroProfile=v=>Object.fromEntries(Object.entries(MACROS).map(([k,m])=>[k,clamp(m.calc(v))]));
+const ARCHETYPES=[
+ ['soft-intense',v=>(v.emotion+v.sensitivity+v.attachment+v.reassurance+v.empathy)/5],
+ ['guarded-soft',v=>(v.defensive+(10-v.trust)+v.attachment+v.sensitivity)/4],
+ ['forceful',v=>(v.assert+v.confidence+v.stubborn+v.independence)/4],
+ ['caretaker',v=>(v.empathy+v.protect+v.duty+v.idealism)/4],
+ ['free-spirit',v=>(v.independence+v.adventure+v.impulse+(10-v.duty))/4],
+ ['strategist',v=>(v.strategy+(10-v.impulse)+(10-v.express)+v.duty)/4],
+ ['romantic',v=>(v.romance+v.attachment+v.reassurance+v.express)/4],
+ ['playful',v=>(v.humor+v.social+v.express+v.impulse)/4]
+];
+const archetypeProfile=v=>Object.fromEntries(ARCHETYPES.map(([k,f])=>[k,clamp(f(v))]));
+function finish(){
+ profile=V(Object.fromEntries(T.map(k=>[k,5])));
+ const delta=Object.fromEntries(T.map(k=>[k,0])); const exposure=Object.fromEntries(T.map(k=>[k,0]));
+ answers.forEach((arr,qi)=>arr.forEach((a,pos)=>{const pw=pos===0?1:.62;const d=Q[qi][1][a][1];Object.entries(d).forEach(([k,v])=>{if(k in delta){delta[k]+=v*pw;exposure[k]+=Math.abs(v)*pw;}})}));
+ T.forEach(k=>{const e=Math.max(5.4,exposure[k]);const rel=e/(e+5);profile[k]=clamp(5+(delta[k]/e)*4.35*rel);});
+ const userMacro=macroProfile(profile), userArch=archetypeProfile(profile);
+ const pool=C.filter(c=>$('#scope').value==='all'||c.arc==='early');
+ const scored=pool.map(c=>{
+   const cm=macroProfile(c.v), ca=archetypeProfile(c.v), core=identityTraits(c);
+   let macroLoss=0,macroW=0; Object.keys(MACROS).forEach(k=>{const w=MACRO_ROLE_WEIGHT[k]||1;macroLoss+=w*Math.pow(Math.abs(userMacro[k]-cm[k])/10,1.7);macroW+=w;});
+   const macroFit=1-macroLoss/macroW;
+   let archLoss=0,archW=0; Object.keys(userArch).forEach(k=>{const w=ARCHETYPE_ROLE_WEIGHT[k]||1;archLoss+=w*Math.pow(Math.abs(userArch[k]-ca[k])/10,1.65);archW+=w;}); const archetypeFit=1-archLoss/archW;
+   let traitLoss=0,traitW=0,identityLoss=0,identityW=0,coreMatches=0,coreContradictions=0,hardContradictions=0,shared=0;
+   T.forEach(k=>{const u=profile[k],cv=c.v[k],us=u-5,cs=cv-5,strength=Math.abs(cs),gap=Math.abs(u-cv);let w=.28+Math.min(1.25,strength/3.5);w*=traitDistinctiveness(c,k)*clusterDiscount(k)*(TRAIT_ROLE_WEIGHT[k]||1);traitLoss+=w*Math.pow(gap/10,1.72);traitW+=w;
+     if(core.has(k)){let iw=(1.15+strength/3)*(TRAIT_ROLE_WEIGHT[k]||1);identityLoss+=iw*Math.pow(gap/10,1.55);identityW+=iw;if(Math.abs(us)>=1.25&&strength>=2.15){if(Math.sign(us)===Math.sign(cs)){coreMatches++;shared++;}else{coreContradictions++;if(gap>=4)hardContradictions++;}}}
+     else if(strength>=2.15&&Math.abs(us)>=1.35&&Math.sign(us)===Math.sign(cs))shared++;
+   });
+   const traitFit=1-traitLoss/traitW, identityFit=identityW?1-identityLoss/identityW:traitFit;
+   // Four genuinely different signals; generic overlap cannot dominate the result.
+   let raw=.25*traitFit+.27*macroFit+.31*identityFit+.17*archetypeFit;
+   // Contradictions are asymmetric: opposing a defining trait costs much more than matching a generic one helps.
+   raw-=coreContradictions*.056+hardContradictions*.078;
+   if(coreMatches>=5&&coreContradictions===0&&identityFit>.90)raw+=.012;
+   const evidence=profileConfidence(c);
+   // Evidence changes confidence in the score itself. Sparse characters regress toward a modest match.
+   const evidenceAdjusted=.56+(raw-.56)*(0.48+0.52*evidence);
+   raw=Math.max(0,Math.min(1,evidenceAdjusted));
+   // Percentage semantics: 80s = strong, 90+ = exceptional, 95+ = near-doppelgänger territory.
+   let sim=25+73*Math.pow(raw,3.35);
+   if(identityFit<.78)sim=Math.min(sim,84.9); if(identityFit<.70)sim=Math.min(sim,78.9);
+   if(coreContradictions===1)sim=Math.min(sim,87.9-hardContradictions*2.5);
+   if(coreContradictions>=2)sim=Math.min(sim,81.9-hardContradictions*3);
+   if(evidence<.75)sim=Math.min(sim,76.9); else if(evidence<.90)sim=Math.min(sim,85.9);
+   const exceptional=evidence>=.95&&raw>=.955&&identityFit>=.94&&archetypeFit>=.93&&coreMatches>=4&&coreContradictions===0;
+   if(!exceptional)sim=Math.min(sim,94.4);
+   return {...c,score:Math.max(15,Math.min(98.2,sim)),evidence,exceptional,debug:{macroFit,traitFit,identityFit,archetypeFit,userMacro,charMacro:cm,core:[...core],coreMatches,coreContradictions,hardContradictions,shared,raw}};
+ }).sort((a,b)=>b.score-a.score);
+ show(scored);submit(scored);
+}
+function show(scored){$('#quiz').classList.add('hidden');const r=$('#results');r.classList.remove('hidden');const top=scored.slice(0,10);const p=top[0];const strongest=[...T].sort((a,b)=>Math.abs(profile[b]-5)-Math.abs(profile[a]-5)).slice(0,5);const label={emotion:'Emotional intensity',social:'Sociability',attachment:'Attachment / closeness',independence:'Independence',impulse:'Impulsivity',empathy:'Empathy',assert:'Assertiveness',idealism:'Idealism',strategy:'Strategic thinking',humor:'Humor / playfulness',ambition:'Ambition',trust:'Trustingness',romance:'Romanticism',protect:'Protectiveness',adventure:'Adventurousness',express:'Emotional expressiveness',sensitivity:'Sensitivity',reassurance:'Reassurance need',stubborn:'Stubbornness',duty:'Responsibility / duty',optimism:'Optimism',avoidance:'Conflict avoidance',confidence:'Self-confidence',defensive:'Emotional defensiveness'};
+ const straw=scored.find(x=>x.tags.includes('Straw Hat'));const ant=scored.find(x=>x.tags.includes('Antagonist'));const featured=new Set([p.name,straw?.name,ant?.name]);const minor=scored.find((x,i)=>i<50&&!featured.has(x.name)&&!x.tags.some(t=>['Straw Hat','Antagonist','Emperor','Worst Generation','Warlord'].includes(t)))||scored.find(x=>!featured.has(x.name))||top[0];
+ r.innerHTML=`<div class="card resultHero"><div class="qnum">Your #1 match</div><div class="winner">${p.name}</div><div class="pct">${p.score.toFixed(1)}% match</div><div class="badges">${p.tags.map(x=>`<span class="badge">${x}</span>`).join('')}</div><p>Your answers created a whole-person personality pattern. ${p.name} had the strongest combination of behavioral style, defining traits, and lack of major identity contradictions. The quiz now cares about HOW your traits fit together — not just how many individual sliders happen to match. Percentages are similarity scores within this quiz's model, not official canon statistics. Tap any character to see why the match did or didn't fit.</p><div class="miniGrid"><div class="mini"><strong>Closest Straw Hat</strong>${straw?.name||'—'} · ${straw?.score.toFixed(1)||'—'}%</div><div class="mini"><strong>Closest antagonist</strong>${ant?.name||'—'} · ${ant?.score.toFixed(1)||'—'}%</div><div class="mini"><strong>Surprising side-character match</strong>${minor.name} · ${minor.score.toFixed(1)}%</div></div></div>
+ <div class="card"><h2>Your Top 10 ♡</h2><div class="toplist">${top.map((x,i)=>`<div class="resultRow clickable" data-char="${x.name.replace(/&/g,'&amp;').replace(/\"/g,'&quot;')}"><div class="rank">#${i+1}</div><div><div class="rname">${x.name}</div><div class="tiny">${x.tags.join(' · ')}</div><div class="tapHint">tap to see why you matched</div>${x.evidence<.75?'<span class="profileNote">limited canon profile</span>':''}</div><div class="rpct">${x.score.toFixed(1)}%</div></div>`).join('')}<div id="topCompare"></div></div></div>
+ <div class="card"><h2>Search any character 🔎</h2><p class="tiny">Curious where somebody placed? Search the full character pool and see your match percentage.</p><div class="searchWrap"><input id="charSearch" class="charSearch" type="search" placeholder="Try Nami, Chopper, Perona…" autocomplete="off"><div id="searchResult" class="searchResult"></div><button id="toggleAll" class="btn secondary smallBtn">View full ranking</button><div id="allRanking" class="allList hiddenList"></div></div></div>
+ <div class="card"><h2>Your personality map</h2><div class="traits">${T.map(k=>`<div class="trait"><b><span>${label[k]}</span><span>${profile[k].toFixed(1)}</span></b><div class="meter"><i style="width:${profile[k]*10}%"></i></div></div>`).join('')}</div></div>
+ <div class="card sharebox"><h2>Share your result</h2><p class="tiny">Copy this and send it to the quiz owner or your friends.</p><textarea id="share" readonly>${$('#name').value.trim()} — one piece quiz ♡\n🥇 ${top[0].name} ${top[0].score.toFixed(1)}%\n🥈 ${top[1].name} ${top[1].score.toFixed(1)}%\n🥉 ${top[2].name} ${top[2].score.toFixed(1)}%\nTop 10: ${top.map((x,i)=>`${i+1}. ${x.name} (${x.score.toFixed(1)}%)`).join(', ')}</textarea><div class="row"><button class="btn" onclick="navigator.clipboard.writeText(document.querySelector('#share').value);this.textContent='Copied! ✓'">Copy result</button><button class="btn secondary" onclick="location.reload()">Take again</button></div><p class="credit">If this page is deployed on Netlify with Forms enabled, the quiz owner's dashboard can collect the name + result automatically. On other hosts, the quiz still works but automatic owner-side collection may not.</p></div>`;
+ const search=$('#charSearch'),sr=$('#searchResult'),all=$('#allRanking'),tog=$('#toggleAll');
+ const row=x=>`<div class="resultRow clickable" data-char="${x.name.replace(/&/g,'&amp;').replace(/\"/g,'&quot;')}"><div><div class="rname">${x.name}</div><div class="tiny">${x.tags.join(' · ')}</div>${x.evidence<.75?'<span class="profileNote">limited canon profile</span>':''}</div><div class="rpct">${x.score.toFixed(1)}%</div></div>`;
+ search.oninput=()=>{const q=search.value.trim().toLowerCase();if(!q){sr.innerHTML='';return}const hits=scored.filter(x=>x.name.toLowerCase().includes(q)).slice(0,8);sr.innerHTML=hits.length?hits.map(row).join(''):'<p class="tiny">No included character found with that name.</p>'};
+ all.innerHTML=scored.map((x,i)=>`<div class="resultRow clickable" data-char="${x.name.replace(/&/g,'&amp;').replace(/\"/g,'&quot;')}"><div class="rank">#${i+1}</div><div><div class="rname">${x.name}</div><div class="tiny">${x.tags.join(' · ')}</div>${x.evidence<.75?'<span class="profileNote">limited canon profile</span>':''}</div><div class="rpct">${x.score.toFixed(1)}%</div></div>`).join('');
+ tog.onclick=()=>{all.classList.toggle('hiddenList');tog.textContent=all.classList.contains('hiddenList')?'View full ranking':'Hide full ranking'};
+ const explain=x=>{
+   const core=new Set(x.debug?.core||[...identityTraits(x)]);
+   const ranked=T.map(k=>({k,u:profile[k],c:x.v[k],gap:Math.abs(profile[k]-x.v[k]),strength:Math.abs(x.v[k]-5),same:Math.sign(profile[k]-5)===Math.sign(x.v[k]-5),core:core.has(k)}));
+   const matches=ranked.filter(z=>z.strength>=1.8&&z.same&&z.gap<=2.2)
+     .sort((a,b)=>(b.core-a.core)||(b.strength-a.strength)||(a.gap-b.gap)).slice(0,5);
+   const diffs=ranked.filter(z=>z.gap>=2.0)
+     .sort((a,b)=>(b.core-a.core)||(b.gap-a.gap)).slice(0,4);
+   const fmt=n=>n.toFixed(1);
+   const um=x.debug?.userMacro||macroProfile(profile), cm=x.debug?.charMacro||macroProfile(x.v);
+   const macroRank=Object.keys(MACROS).map(k=>({k,u:um[k],c:cm[k],gap:Math.abs(um[k]-cm[k])}));
+   const macroMatches=macroRank.filter(z=>z.gap<=1.35).sort((a,b)=>a.gap-b.gap).slice(0,3);
+   const macroDiffs=macroRank.filter(z=>z.gap>=2.25).sort((a,b)=>b.gap-a.gap).slice(0,3);
+   const pill=z=>`<span class="whyPill">${z.core?'★ ':''}${label[z.k]}: you ${fmt(z.u)} · ${x.name} ${fmt(z.c)}</span>`;
+   const dpill=z=>`<span class="whyPill diff">${z.core?'★ ':''}${label[z.k]}: you ${fmt(z.u)} · ${x.name} ${fmt(z.c)}</span>`;
+
+   const macroMatchText=macroMatches.map(z=>MACROS[z.k].label.toLowerCase());
+   const macroDiffText=macroDiffs.map(z=>`${MACROS[z.k].label.toLowerCase()} (you ${fmt(z.u)} · ${x.name} ${fmt(z.c)})`);
+   let summary=`Your strongest whole-person overlap with ${x.name} is ${naturalList(macroMatchText)||'spread across several smaller similarities'}.`;
+   if(macroDiffText.length) summary+=` Your biggest pattern difference${macroDiffText.length>1?'s are':' is'} ${naturalList(macroDiffText)}.`;
+   if(x.debug?.coreContradictions) summary+=` You also oppose ${x.debug.coreContradictions} defining trait${x.debug.coreContradictions>1?'s':''} for ${x.name}, so those contradictions put a real ceiling on the match.`;
+   else if((x.debug?.coreMatches||0)>=3) summary+=` You match several traits that are central to ${x.name}'s characterization, which strengthens the result.`;
+
+   return `<div class="comparePanel"><h3>You vs. ${x.name} — ${x.score.toFixed(1)}%</h3>
+   <div class="matchSummary"><b>Why this match makes sense:</b> ${summary}</div>
+   <p class="tiny">★ marks a trait the quiz treats as especially defining for ${x.name}. The score uses defining traits, contradictions, whole-person context, and how much canon personality evidence exists for the character.</p>
+   <b>Biggest reasons you matched</b><div>${matches.length?matches.map(pill).join(''):'<span class="tiny">Your match came more from the overall pattern than one standout trait.</span>'}</div>
+   <div style="margin-top:12px"><b>Where you differ</b><div>${diffs.length?diffs.map(dpill).join(''):'<span class="tiny">No major trait gaps in this model.</span>'}</div></div>
+   <div style="margin-top:14px"><b>Whole-person pattern</b><div class="compareGrid">${macroRank.sort((a,b)=>a.gap-b.gap).slice(0,5).map(z=>`<div class="compareTrait"><b>${MACROS[z.k].label}</b><div class="tiny">You: ${fmt(z.u)} · ${x.name}: ${fmt(z.c)}</div></div>`).join('')}</div></div>
+   <div class="compareGrid">${ranked.sort((a,b)=>a.gap-b.gap).slice(0,6).map(z=>`<div class="compareTrait"><b>${z.core?'★ ':''}${label[z.k]}</b><div class="tiny">You: ${fmt(z.u)} · ${x.name}: ${fmt(z.c)}</div></div>`).join('')}</div>
+   ${x.evidence<.75?`<div class="identityNote">${x.name} has a limited canon personality profile, so this result is intentionally held to a higher evidence threshold.</div>`:''}
+   </div>`;
+ };
+ r.addEventListener('click',e=>{const el=e.target.closest('.resultRow.clickable');if(!el)return;const x=scored.find(v=>v.name===el.dataset.char);if(!x)return;let panel=el.nextElementSibling;if(panel?.classList?.contains('comparePanel')){panel.remove();return;}r.querySelectorAll('.comparePanel').forEach(n=>n.remove());el.insertAdjacentHTML('afterend',explain(x));});
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function submit(scored){const data=new URLSearchParams();data.append('form-name','quiz-results');data.append('name',$('#name').value.trim());data.append('winner',`${scored[0].name} (${scored[0].score.toFixed(1)}%)`);data.append('top10',scored.slice(0,10).map((x,i)=>`${i+1}. ${x.name} ${x.score.toFixed(1)}%`).join(' | '));data.append('fullranking',scored.map((x,i)=>`${i+1}. ${x.name} ${x.score.toFixed(1)}%`).join(' | '));data.append('profile',JSON.stringify(profile));data.append('scoring_version','v18-identity-first-temperament');const answerSheet=answers.map((arr,qi)=>`Q${qi+1}. ${Q[qi][0]} => ${arr.map(ai=>Q[qi][1][ai][0]).join(' + ')}`).join('\n');data.append('answers',answerSheet);data.append('timestamp',new Date().toISOString());fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:data.toString()}).catch(()=>{});}
+</script>
+</body></html>
